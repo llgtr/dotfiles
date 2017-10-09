@@ -8,6 +8,9 @@
 ;; Indent with spaces rather than tabs by default
 (setq-default indent-tabs-mode nil)
 
+;; Set font
+(add-to-list 'default-frame-alist '(font . "Hack 11"))
+
 ;; Appearance
 (blink-cursor-mode 0)
 (set-fringe-mode 0)
