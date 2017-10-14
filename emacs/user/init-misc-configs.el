@@ -8,6 +8,16 @@
 ;; Indent with spaces rather than tabs by default
 (setq-default indent-tabs-mode nil)
 
+;; Better backup configurations (Be careful with this if editing sensitive files via emacs)
+(let ((backup-directory (expand-file-name "backup" user-emacs-directory)))
+  ; https://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html
+  (setq backup-directory-alist `(("." . ,backup-directory))
+        make-backup-files t
+        backup-by-copying t
+        version-control t
+        delete-old-versions t
+        auto-save-default t))
+
 ;; Set font
 (add-to-list 'default-frame-alist '(font . "Iosevka Term 12"))
 
@@ -22,9 +32,9 @@
 ;;                        Welcome to emacs %s       ,           ,
 ;;           ___     ___     //                        /             \\
 ;;          /   \\~~~/   \\   //                        ((__-^^-,-^^-__))
-;;    ,----(     .  .    )                             `-_---' `---_-'
-;;   /      \\___     ___/                               `--|o` 'o|--'
-;;  /|          (\\   |(                                    \\  `  /
+;;    ,----(     .  .    )                             '-_---' '---_-'
+;;   /      \\___     ___/                               '--|o' 'o|--'
+;;  /|          (\\   |(                                    \\  '  /
 ;; ^ \\   /___\\   /\\  |                                      ): :(
 ;;    |__|    |__|-''                                       :o_o:
 ;;                                                           \"-\"
