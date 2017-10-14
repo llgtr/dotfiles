@@ -9,7 +9,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Set font
-(add-to-list 'default-frame-alist '(font . "Hack 11"))
+(add-to-list 'default-frame-alist '(font . "Iosevka Term 12"))
 
 ;; Appearance
 (blink-cursor-mode 0)
