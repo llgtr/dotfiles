@@ -41,6 +41,9 @@
 "
               emacs-version))
 
+;; Start in fullscreen mode
+(custom-set-variables '(initial-frame-alist '((fullscreen . maximized))))
+
 ;; Padding for linum
 (defun linum-format-func (line)
   (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
