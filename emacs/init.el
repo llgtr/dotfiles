@@ -15,10 +15,6 @@
 ;; Path to user directory
 (add-to-list 'load-path (expand-file-name "user" user-emacs-directory))
 
-;; Enable package (not used atm)
-;(require 'package)
-;(package-initialize)
-
 ;; Load configurations
 (require 'init-packages)
 (require 'init-misc-configs)
