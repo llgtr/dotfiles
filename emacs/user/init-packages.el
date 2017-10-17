@@ -19,6 +19,14 @@
   :load-path "lib/pkg-info"
   :defer t)
 
+(use-package spinner
+  :load-path "lib/spinner"
+  :defer t)
+
+(use-package queue
+  :load-path "lib/queue"
+  :demand t)
+
 ;; Packages
 (use-package evil
   :load-path "lock/evil"
