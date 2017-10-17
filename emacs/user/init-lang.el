@@ -8,7 +8,8 @@
 ;; Rust
 (use-package rust-mode
   :load-path "lock/rust-mode"
-  :defer t)
+  :mode ("\\.rs\\'"   . rust-mode)
+        ("\\.rlib\\'" . rust-mode))
 
 (use-package flycheck-rust
   :load-path "lock/flycheck-rust"
@@ -21,7 +22,9 @@
 ;; Clojure
 (use-package clojure-mode
   :load-path "lock/clojure-mode"
-  :defer t)
+  :mode ("\\.clj\\'"  . clojure-mode)
+        ("\\.cljs\\'" . clojure-mode)
+        ("\\.cljc\\'" . clojure-mode))
 
 (use-package rainbow-delimiters
   :load-path "lock/rainbow-delimiters"
@@ -37,7 +40,7 @@
 ;; Haskell
 (use-package haskell-mode
   :load-path "lock/haskell-mode"
-  :defer t
+  :mode ("\\.hs\\'" . haskell-mode)
   :config (add-hook 'haskell-mode-hook #'interactive-haskell-mode))
 
 (use-package flycheck-haskell
