@@ -8,7 +8,11 @@
 ;; Indent with spaces rather than tabs by default
 (setq-default indent-tabs-mode nil)
 
-;; Better backup configurations (Be careful with this if editing sensitive files via emacs)
+;; Whitespace mode config
+(setq whitespace-style '(face tabs newline trailing lines))
+
+;; Better backup configurations
+;; (Be careful with this if editing sensitive files via emacs)
 (let ((backup-directory (expand-file-name "backup" user-emacs-directory)))
   ; https://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html
   (setq backup-directory-alist `(("." . ,backup-directory))
