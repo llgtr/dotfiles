@@ -43,9 +43,6 @@
 [submodule "emacs/locked-packages/which-key"]
 	path = emacs/lock/which-key
 	url = https://github.com/justbur/emacs-which-key.git
-[submodule "emacs/locked-packages/telephone-line"]
-	path = emacs/lock/telephone-line
-	url = https://github.com/dbordak/telephone-line.git
 [submodule "emacs/locked-packages/rust-mode"]
 	path = emacs/lock/rust-mode
 	url = https://github.com/rust-lang/rust-mode.git

@@ -66,7 +66,7 @@
   :config
   (projectile-mode))
 
-(require 'init-telephone-line)
+(require 'init-mode-line)
 (require 'init-lang)
 
 (provide 'init-packages)
