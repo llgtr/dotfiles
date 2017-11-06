@@ -10,7 +10,7 @@
 
 ;; Whitespace mode config
 (setq whitespace-style '(face tabs newline trailing lines))
-(global-whitespace-mode 1)
+(global-set-key (kbd "C-x w") 'whitespace-mode)
 
 ;; Better backup configurations
 ;; (Be careful with this if editing sensitive files via emacs)

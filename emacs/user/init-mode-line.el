@@ -26,7 +26,7 @@
   (propertized-buffer-identification "%b"))
 
 (defun simple-mode-line-render (left right)
-  "Return a string of `window-width' length containing LEFT, and RIGHT
+  "Return a string of `window-total-width' length containing LEFT, and RIGHT
  aligned respectively."
   (let* ((available-width (- (window-total-width) (length left) 2)))
     (format (format " %%s %%%ds " available-width) left right)))
