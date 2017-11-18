@@ -2,7 +2,7 @@
 
 DOT_ROOT="$(cd "$(dirname "$0")" && pwd -P)"
 
-set -e
+set -eo pipefail
 
 ##################################################
 # Helper function to write out in color

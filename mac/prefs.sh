@@ -2,7 +2,7 @@
 
 SCRIPT_ROOT="$(cd "$(dirname "$0")" && pwd -P)"
 
-set -e
+set -eo pipefail
 
 for i in $SCRIPT_ROOT/plists/*; do
     filename="$(basename $i)"
