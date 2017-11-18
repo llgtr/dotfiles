@@ -3,12 +3,14 @@ Config
   , borderColor = "#0E0E0E"
   , font        = "xft:Iosevka Term:size=10"
   , position    = Static { xpos = 8, ypos = 426, width = 1904, height = 20 }
-  , template    = "}%StdinReader%{%battery% %date%  "
+  , template    = "  %vol%, %bright%}%StdinReader%{%battery% %date%  "
   , textOffset  = 14
   , pickBroadest = True
   , commands =
-    [ Run StdinReader
-    , Run Network "enp5s0" ["-L", "0", "-H", "32", "--normal", "green", "--high", "red"] 10
+    [ Run Brightness ["-t", "Brightness: <percent>%"] 50
+    --, Run Volume "default" "Master" [] 50 -- Enable later (maybe)
+    , Run Com "/bin/bash" ["-c", "~/.xmonad/vol"] "vol" 50
+    , Run StdinReader
     , Run BatteryP
         ["BAT0"]
         ["-t", "<acstatus>", "--"

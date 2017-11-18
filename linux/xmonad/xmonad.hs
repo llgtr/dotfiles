@@ -9,11 +9,11 @@ import XMonad.Layout.FixedColumn
 import XMonad.Layout.Spacing
 import XMonad.Util.CustomKeys
 import XMonad.Util.Run
+import XMonad.Util.SpawnOnce
 
 import Data.List
 
 import MyKeyBindings
-
 
 main :: IO ()
 main = do
@@ -22,11 +22,17 @@ main = do
     $ withNavigation2DConfig def { layoutNavigation = [("BSP", hybridNavigation)] }
     $ myConfig { logHook = dynamicLogWithPP $ myXmobarPP xmobarPipe }
 
-
--- TODO: Get these colors from xrdb
 backgroundColor   = "#FEFEFE"
 middleColor       = "#AEAEAE"
 foregroundColor   = "#0E0E0E"
+
+startUp :: X()
+startUp = do
+    spawnOnce "nitrogen --restore"
+
+myManageHook = composeAll
+    [ className =? "Thunar" --> doFloat
+    ]
 
 myConfig = def
   { borderWidth        = 1
@@ -35,7 +41,8 @@ myConfig = def
   , handleEventHook    = docksEventHook
   , keys               = myKeys
   , layoutHook         = avoidStruts $ spacingWithEdge 4 emptyBSP
-  , manageHook         = manageDocks
+  , manageHook         = manageDocks <+> myManageHook
+  , startupHook        = startUp
   , modMask            = mod4Mask
   , normalBorderColor  = middleColor
   , clickJustFocuses   = False
