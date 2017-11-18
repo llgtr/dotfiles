@@ -329,7 +329,7 @@
     </keybind>
     <keybind key="W-space">
       <action name="Execute">
-        <command>dmenu_run -i -m 0 -fn "gohugohufont" -nb "#222" -sb "#444" -sf "#6699ff"</command>
+        <command>rofi -show drun</command>
       </action>
     </keybind>
     <keybind key="C-A-E">
