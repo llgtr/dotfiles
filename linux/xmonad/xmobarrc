@@ -9,7 +9,7 @@ Config
   , commands =
     [ Run Brightness ["-t", "Brightness: <percent>%"] 50
     --, Run Volume "default" "Master" [] 50 -- Enable later (maybe)
-    , Run Com "/bin/bash" ["-c", "~/.xmonad/vol"] "vol" 50
+    , Run Com "/bin/bash" ["-c", "~/.xmonad/vol"] "vol" 10
     , Run StdinReader
     , Run BatteryP
         ["BAT0"]
