@@ -21,23 +21,29 @@ removedKeys XConfig {modMask = modm} =
   ]
 
 addedKeys :: XConfig l -> [((KeyMask, KeySym), X ())]
-addedKeys conf@XConfig {modMask = modm} =
+addedKeys conf @ XConfig {modMask = modm} =
   [
-    ((modm, xK_space) , spawn "rofi -show drun") -- Rofi
+    ((modm, xK_space)                , spawn "rofi -show drun") -- Rofi
   , ((mod1Mask .|. controlMask, xK_t), spawn $ XMonad.terminal conf) -- Terminal
   , ((mod1Mask .|. controlMask, xK_e), spawn "emacs")
   , ((mod1Mask .|. controlMask, xK_f), spawn "firefox")
-  , ((modm, xK_s), spawn "sleep 0.2; scrot -s")
+  , ((modm, xK_s)                    , spawn "sleep 0.2; scrot -s")
+
+  , ((modm, xK_v), spawn "notify-send $(. ~/.xmonad/vol) -u low")
+  , ((modm, xK_d), spawn "notify-send \"$(date '+%A, %d %B %H:%M')\"")
+  -- TODO: Add battery notification and notifications for workspace changes
+
   , ((modm, xK_w)     , kill) -- Close application
   , ((modm, xK_Tab)   , toggleWS) -- Switch to last workspace
   , ((modm, xK_r)     , sendMessage Rotate) -- Rotate windows
   , ((modm, xK_z)     , sendMessage Swap) -- Swap windows
-    --, ((modm, xK_t), sendMessage NextLayout) -- Layout switching
+
     -- Directional navigation of windows
   , ((modm, xK_l), windowGo R False)
   , ((modm, xK_h), windowGo L False)
   , ((modm, xK_k), windowGo U False)
   , ((modm, xK_j), windowGo D False)
+
     -- Expand and shrink windows
   , ((modm .|. controlMask,                xK_l), sendMessage $ ExpandTowards R)
   , ((modm .|. controlMask,                xK_h), sendMessage $ ExpandTowards L)
