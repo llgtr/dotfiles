@@ -159,6 +159,7 @@ elif [[ "$(uname -s)" == "Linux" ]]; then
     link_file "linux/compton/compton.conf" ".config/compton.conf"
     link_file "linux/xmonad/" ".xmonad"
     link_file "linux/rofi/config.rasi" ".config/rofi/config.rasi"
+    link_file "linux/dunst/dunstrc" ".config/dunst/dunstrc"
 
     setup_polybar_monitor
 
