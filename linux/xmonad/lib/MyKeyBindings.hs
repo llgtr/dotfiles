@@ -30,7 +30,7 @@ addedKeys conf @ XConfig {modMask = modm} =
   , ((modm, xK_s)                    , spawn "sleep 0.2; scrot -s")
 
   , ((modm, xK_v), spawn "notify-send $(. ~/.xmonad/vol) -u low")
-  , ((modm, xK_d), spawn "notify-send \"$(date '+%A, %d %B %H:%M')\"")
+  , ((modm, xK_d), spawn "notify-send \"$(date '+%A, %d %B %H:%M')\" -u low")
   -- TODO: Add battery notification and notifications for workspace changes
 
   , ((modm, xK_w)     , kill) -- Close application
