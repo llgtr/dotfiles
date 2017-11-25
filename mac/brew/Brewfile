@@ -21,3 +21,4 @@ brew "emacs", args: ["with-cocoa", "with-gnutls"]
 # Casks
 cask "java"
 cask "iterm2"
+cask "firefox"
