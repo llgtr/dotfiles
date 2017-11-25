@@ -22,3 +22,4 @@ brew "emacs", args: ["with-cocoa", "with-gnutls"]
 cask "java"
 cask "iterm2"
 cask "firefox"
+cask "mactex"
