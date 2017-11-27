@@ -51,4 +51,8 @@
   (add-hook 'haskell-mode-hook #'flycheck-mode)
   (add-hook 'haskell-mode-hook #'flycheck-haskell-setup))
 
+(use-package web-mode
+  :load-path "lock/web-mode"
+  :mode ("\\.html?\\'" . web-mode))
+
 (provide 'init-lang)
