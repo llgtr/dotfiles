@@ -73,3 +73,9 @@
 [submodule "emacs/lock/web-mode"]
 	path = emacs/lock/web-mode
 	url = https://github.com/fxbois/web-mode.git
+[submodule "emacs/lock/rjsx-mode"]
+	path = emacs/lock/rjsx-mode
+	url = https://github.com/felipeochoa/rjsx-mode.git
+[submodule "emacs/lock/js2-mode"]
+	path = emacs/lock/js2-mode
+	url = https://github.com/mooz/js2-mode.git
