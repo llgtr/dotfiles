@@ -63,7 +63,7 @@
 
 (use-package rjsx-mode
   :load-path "lock/rjsx-mode"
-  :after js2-mode
+  :requires js2-mode
   :mode
   ("\\.jsx?\\'" . rjsx-mode))
 
