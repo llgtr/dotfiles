@@ -27,6 +27,10 @@
   :load-path "lib/queue"
   :demand t)
 
+(use-package undo-tree
+  :load-path "lock/evil/lib"
+  :demand t)
+
 ;; Packages
 (use-package evil
   :load-path "lock/evil"
