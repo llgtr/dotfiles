@@ -1,4 +1,20 @@
-Dotfiles.
+# Dotfiles.
+
+Run `install` to get started.
+
+### Subtrees
+
+Subtrees are used to include packages for emacs and vim.  Use the following
+commands to add and update new ones.
+
+* Add remote (optional)
+  * `git remote add <name> <git_url>`
+
+* Add subtree
+  * `git subtree add --prefix <path_from_root> <remote_name / git_url> master --squash`
+
+* Update subtree
+  * `git subtree pull --prefix <path_from_root> <remote_name / git_url> master --squash`
 
 ### Credits/Thanks
 
