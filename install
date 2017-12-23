@@ -120,11 +120,6 @@ link_file "vim/" ".vim"
 link_file "emacs/" ".emacs.d"
 link_file "lein/profiles.clj" ".lein/profiles.clj"
 
-cd $DOT_ROOT
-echo_c "Initializing submodules." 2 -b
-git submodule update --init --recursive
-cd -
-
 if [[ "$(uname -s)" == "Darwin" ]]; then
     echo_c "Running MacOS-specific stuff." 2 -b
 
