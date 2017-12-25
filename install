@@ -155,6 +155,7 @@ elif [[ "$(uname -s)" == "Linux" ]]; then
     link_file "linux/xmonad/" ".xmonad"
     link_file "linux/rofi/config.rasi" ".config/rofi/config.rasi"
     link_file "linux/dunst/dunstrc" ".config/dunst/dunstrc"
+    link_file "linux/notify-send.sh/notify-send.sh" ".local/bin/notify-send.sh"
 
     setup_polybar_monitor
 
