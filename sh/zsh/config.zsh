@@ -1,5 +1,22 @@
+# Color scheme helper
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
 # => General configs
 export EDITOR=vim
+
+# Vi mode
+bindkey -v
+
+# Init better autocomplete
+autoload -U compinit
+compinit
+zstyle ':completion:*' insert-tab pending
+
+# Set $TERM to 256color
+case "$TERM" in
+    xterm) TERM=xterm-256color
+esac
 
 REPORTTIME=10
 
