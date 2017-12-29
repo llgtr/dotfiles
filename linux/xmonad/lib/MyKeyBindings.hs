@@ -11,6 +11,8 @@ import XMonad.Layout.ToggleLayouts
 
 import XMonad.Util.CustomKeys
 
+import Graphics.X11.ExtraTypes.XF86
+
 myKeys = customKeys removedKeys addedKeys
 
 removedKeys :: XConfig l -> [(KeyMask, KeySym)]
@@ -29,8 +31,17 @@ addedKeys conf @ XConfig {modMask = modm} =
   , ((mod1Mask .|. controlMask, xK_f), spawn "firefox")
   , ((modm, xK_s)                    , spawn "sleep 0.2; scrot -s")
 
-  , ((modm, xK_v), spawn "notify-send $(. ~/.xmonad/vol) -u low")
-  , ((modm, xK_d), spawn "notify-send \"$(date '+%A, %d %B %H:%M')\" -u low")
+  , ((0, xF86XK_AudioRaiseVolume), spawn
+      "amixer -D pulse set Master 5%+ unmute; \
+      \ $(. ~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(. ~/.xmonad/vol)\" -u low)")
+  , ((0, xF86XK_AudioLowerVolume), spawn
+      "amixer -D pulse set Master 5%- unmute; \
+      \ $(. ~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(. ~/.xmonad/vol)\" -u low)")
+  , ((0, xF86XK_AudioMute), spawn
+      "amixer -D pulse set Master toggle; \
+      \ $(. ~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(. ~/.xmonad/vol)\" -u low)")
+  , ((modm, xK_d), spawn
+      "$(. ~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(date '+%A, %d %B %H:%M')\" -u low)")
   -- TODO: Add battery notification and notifications for workspace changes
 
   , ((modm, xK_w)     , kill) -- Close application
