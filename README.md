@@ -2,10 +2,9 @@
 
 Run `install` to get started.
 
-### Subtrees
+### Git subtrees
 
-Subtrees are used to include packages for emacs and vim.  Use the following
-commands to add and update new ones.
+Subtrees are used to include dependencies for this repo. This ensures that the configuration is easy to clone and will be independent from upstream changes. Use the following commands to add and update:
 
 * Add remote (optional)
   * `git remote add <name> <git_url>`
