@@ -33,15 +33,15 @@ addedKeys conf @ XConfig {modMask = modm} =
 
   , ((0, xF86XK_AudioRaiseVolume), spawn
       "amixer -D pulse set Master 5%+ unmute; \
-      \ $(. ~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(. ~/.xmonad/vol)\" -u low)")
+      \ $(~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(. ~/.xmonad/vol)\" -u low)")
   , ((0, xF86XK_AudioLowerVolume), spawn
       "amixer -D pulse set Master 5%- unmute; \
-      \ $(. ~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(. ~/.xmonad/vol)\" -u low)")
+      \ $(~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(. ~/.xmonad/vol)\" -u low)")
   , ((0, xF86XK_AudioMute), spawn
       "amixer -D pulse set Master toggle; \
-      \ $(. ~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(. ~/.xmonad/vol)\" -u low)")
+      \ $(~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(. ~/.xmonad/vol)\" -u low)")
   , ((modm, xK_d), spawn
-      "$(. ~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(date '+%A, %d %B %H:%M')\" -u low)")
+      "$(~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(date '+%A, %d %B %H:%M')\" -u low)")
   -- TODO: Add battery notification and notifications for workspace changes
 
   , ((modm, xK_w)     , kill) -- Close application
