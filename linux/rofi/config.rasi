@@ -20,8 +20,8 @@ font: "Iosevka Term 10";
 /*	window-command: "xkill -id {window}";*/
 /*	drun-icon-theme: ;*/
 disable-history: false;
-sort: true;
-levenshtein-sort: false;
+sort: false;
+levenshtein-sort: true;
 /*	case-sensitive: false;*/
 /*	cycle: true;*/
 /*	sidebar-mode: false;*/
