@@ -13,7 +13,6 @@
 
 (use-package flycheck-rust
   :load-path "lock/flycheck-rust"
-  :defer t
   :after rust-mode
   :config
   (add-hook 'rust-mode-hook #'flycheck-mode)
@@ -28,13 +27,11 @@
 
 (use-package rainbow-delimiters
   :load-path "lock/rainbow-delimiters"
-  :defer t
   :after clojure-mode
   :config (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
 
 (use-package cider
   :load-path "lock/cider"
-  :defer t
   :after clojure-mode)
 
 ;; Haskell
@@ -45,7 +42,6 @@
 
 (use-package flycheck-haskell
   :load-path "lock/flycheck-haskell"
-  :defer t
   :after haskell-mode
   :config
   (add-hook 'haskell-mode-hook #'flycheck-mode)
