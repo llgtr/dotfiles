@@ -13,11 +13,6 @@ autoload -U compinit
 compinit
 zstyle ':completion:*' insert-tab pending
 
-# Set $TERM to 256color
-case "$TERM" in
-    xterm) TERM=xterm-256color
-esac
-
 REPORTTIME=10
 
 KEYTIMEOUT=1
