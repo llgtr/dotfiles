@@ -4,3 +4,4 @@
 [credential]
         helper = GIT_CREDENTIAL_HELPER
 
+# vim: set filetype=gitconfig :
