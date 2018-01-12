@@ -55,5 +55,6 @@
     un = reset HEAD --
 
     g = grep
+    gci = grep -ci
 
 # vim: set filetype=gitconfig :
