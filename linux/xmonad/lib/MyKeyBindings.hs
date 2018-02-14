@@ -29,7 +29,7 @@ addedKeys conf @ XConfig {modMask = modm} =
   , ((mod1Mask .|. controlMask, xK_t), spawn $ XMonad.terminal conf) -- Terminal
   , ((mod1Mask .|. controlMask, xK_e), spawn "emacs")
   , ((mod1Mask .|. controlMask, xK_f), spawn "firefox")
-  , ((modm, xK_s)                    , spawn "sleep 0.2; scrot -s")
+  , ((modm, xK_s)                    , spawn "sleep 0.2; scrot -s -e 'mv $f ~/Pictures/screencaps/'")
 
   , ((0, xF86XK_AudioRaiseVolume), spawn
       "amixer -D pulse set Master 5%+ unmute; \
