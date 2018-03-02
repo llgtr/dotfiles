@@ -7,8 +7,17 @@ fi
 
 # => Aliases
 alias cl='clear'
-alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
+
 alias g='git'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
 
 # => MacOS
 alias showAll='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'
