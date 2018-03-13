@@ -32,7 +32,7 @@ function link_file {
     if [[ ! -e "${dst%/*}" ]]; then
         read -r -p \
             "$(echo_c "No directory at '$dst'. Create one [y/n]? " 3)" prompt
-        if [[ ! $prompt =~ ^[Yy]$ ]]; then
+        if [[ ! "$prompt" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
             return
         fi
 
@@ -49,7 +49,7 @@ function link_file {
         read -r -p \
             "$(echo_c "Directory '$dst' already exists. Overwrite [y/n]? " 3)" \
             prompt
-        if [[ ! $prompt =~ ^[Yy]$ ]]; then
+        if [[ ! "$prompt" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
             return
         fi
 
@@ -58,7 +58,7 @@ function link_file {
         read -r -p \
             "$(echo_c "File '$dst' already exists. Overwrite [y/n]? " 3)" \
             prompt
-        if [[ ! $prompt =~ ^[Yy]$ ]]; then
+        if [[ ! "$prompt" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
             return
         fi
 
@@ -126,17 +126,17 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     link_file "tmux/tmux-mac.conf" ".tmux.conf"
 
     read -r -p "$(echo_c "Run defaults.sh [y/n]? " 3)" prompt
-    if [[ $prompt =~ ^[Yy]$ ]]; then
+    if [[ "$prompt" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
         sh $DOT_ROOT/mac/defaults.sh
     fi
 
     read -r -p "$(echo_c "Run homebrew.sh [y/n]? " 3)" prompt
-    if [[ $prompt =~ ^[Yy]$ ]]; then
+    if [[ "$prompt" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
         sh $DOT_ROOT/mac/brew/homebrew.sh
     fi
 
     read -r -p "$(echo_c "Run prefs.sh [y/n]? " 3)" prompt
-    if [[ $prompt =~ ^[Yy]$ ]]; then
+    if [[ "$prompt" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
         sh $DOT_ROOT/mac/prefs.sh import
     fi
 elif [[ "$(uname -s)" == "Linux" ]]; then
@@ -160,14 +160,14 @@ elif [[ "$(uname -s)" == "Linux" ]]; then
 
     if [[ -e /etc/arch-release ]]; then
         read -r -p "$(echo_c "Run pacman.sh [y/n]? " 3)" prompt
-        if [[ $prompt =~ ^[Yy]$ ]]; then
+        if [[ "$prompt" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
             sh $DOT_ROOT/linux/scripts/pacman.sh
         fi
     fi
 
     if [[ ! -e $HOME/.local/bin/lein ]]; then
         read -r -p "$(echo_c "Run lein_install.sh [y/n]? " 3)" prompt
-        if [[ $prompt =~ ^[Yy]$ ]]; then
+        if [[ "$prompt" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
             sh $DOT_ROOT/linux/scripts/lein_install.sh
         fi
     fi
