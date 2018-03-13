@@ -84,6 +84,11 @@ function setup_gitconfig {
     read -r -p "$(echo_c "What is your git user.name? " 3)" git_authorname
     read -r -p "$(echo_c "What is your git user.email? " 3)" git_authoremail
 
+    local git_credential='cache'
+    if [[ "$(uname -s)" == "Darwin" ]]; then
+        local git_credential='osxkeychain'
+    fi
+
     sed -e "s/AUTHORNAME/$git_authorname/g" \
         -e "s/AUTHOREMAIL/$git_authoremail/g" \
         -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" \
