@@ -2,7 +2,7 @@
 #
 # Install things.
 
-DOT_ROOT="$(cd "$(dirname "$0")" && pwd -P)"
+DOT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 set -eo pipefail
 
@@ -18,9 +18,9 @@ set -eo pipefail
 ##################################################
 function echo_c {
     if [[ $3 == "-b" ]]; then
-        echo "$(tput bold && tput setaf $2)$1$(tput sgr0)"
+        echo "$(tput bold && tput setaf "$2")$1$(tput sgr0)"
     else
-        echo "$(tput setaf $2)$1$(tput sgr0)"
+        echo "$(tput setaf "$2")$1$(tput sgr0)"
     fi
 }
 
@@ -31,45 +31,29 @@ function echo_c {
 #   None
 ##################################################
 function link_file {
-    local src="$DOT_ROOT/$1"; local dst="$HOME/$2"
+    local src="$DOT_ROOT/$1"; local dst="$HOME/$2"; local dst_dir
 
-    # Check if directory exists.
-    if [[ ! -e "$(dirname $dst)" ]]; then
-        read -r -p \
-            "$(echo_c "No directory at '$dst'. Create one [y/n]? " 3)"
-        if [[ ! "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-            return
-        fi
-
-        mkdir -p "$(dirname $dst)"
+    dst_dir=$(dirname "$dst")
+    if [[ ! -e "$dst_dir" ]]; then
+        mkdir -p "$dst_dir"
     fi
 
-    # Unlink if link already exists.
-    if [[ -L "$dst" ]]; then
-        unlink "$dst"
-    fi
-
-    # Check if overwriting directory or file.
-    if [[ -d "$dst" ]]; then
-        read -r -p \
-            "$(echo_c "Directory '$dst' already exists. Overwrite [y/n]? " 3)"
-        if [[ ! "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-            return
-        fi
-
-        rm -rf "$dst"
-    elif [[ -e "$dst" ]]; then
+    if [[ -e "$dst" ]] && [[ ! -L "$dst" ]]; then
         read -r -p \
             "$(echo_c "File '$dst' already exists. Overwrite [y/n]? " 3)"
         if [[ ! "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
             return
         fi
 
-        rm "$dst"
+        if [[ -d "$dst" ]]; then
+            rm -rf "$dst"
+        else
+            rm "$dst"
+        fi
     fi
 
     echo "$(echo_c "Linking" 6) $src $(echo_c "->" 6) $dst"
-    ln -s "$src" "$dst"
+    ln -sf "$src" "$dst"
 }
 
 # Taken from https://github.com/holman/dotfiles/blob/master/script/bootstrap
@@ -92,7 +76,7 @@ function setup_gitconfig {
     sed -e "s/AUTHORNAME/$git_authorname/g" \
         -e "s/AUTHOREMAIL/$git_authoremail/g" \
         -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" \
-        $DOT_ROOT/git/gitconfig.local.example > $DOT_ROOT/git/gitconfig.local
+        "$DOT_ROOT/git/gitconfig.local.example" > "$DOT_ROOT/git/gitconfig.local"
   fi
 }
 
@@ -108,11 +92,11 @@ function setup_polybar_monitor {
             monitor
 
         sed -e "s/MONITOR/$monitor/g" \
-            $DOT_ROOT/linux/polybar/template > $DOT_ROOT/linux/polybar/config
+            "$DOT_ROOT/linux/polybar/template" > "$DOT_ROOT/linux/polybar/config"
     fi
 }
 
-setup_gitconfig
+setup_gitconfig # Run git config helper
 
 echo_c "Linking common files." 2 -b
 link_file "sh/bash_profile" ".bash_profile"
@@ -135,17 +119,17 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 
     read -r -p "$(echo_c "Run defaults.sh [y/n]? " 3)"
     if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-        sh $DOT_ROOT/mac/defaults.sh
+        sh "$DOT_ROOT/mac/defaults.sh"
     fi
 
     read -r -p "$(echo_c "Run homebrew.sh [y/n]? " 3)"
     if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-        sh $DOT_ROOT/mac/brew/homebrew.sh
+        sh "$DOT_ROOT/mac/brew/homebrew.sh"
     fi
 
     read -r -p "$(echo_c "Run prefs.sh [y/n]? " 3)"
     if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-        sh $DOT_ROOT/mac/prefs.sh import
+        sh "$DOT_ROOT/mac/prefs.sh import"
     fi
 elif [[ "$(uname -s)" == "Linux" ]]; then
     echo_c "Running Linux-specific stuff." 2 -b
@@ -169,14 +153,14 @@ elif [[ "$(uname -s)" == "Linux" ]]; then
     if [[ -e /etc/arch-release ]]; then
         read -r -p "$(echo_c "Run pacman.sh [y/n]? " 3)"
         if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-            sh $DOT_ROOT/linux/scripts/pacman.sh
+            sh "$DOT_ROOT/linux/scripts/pacman.sh"
         fi
     fi
 
     if [[ ! -e $HOME/.local/bin/lein ]]; then
         read -r -p "$(echo_c "Run lein_install.sh [y/n]? " 3)"
         if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-            sh $DOT_ROOT/linux/scripts/lein_install.sh
+            sh "$DOT_ROOT/linux/scripts/lein_install.sh"
         fi
     fi
 fi
