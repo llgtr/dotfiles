@@ -150,13 +150,6 @@ elif [[ "$(uname -s)" == "Linux" ]]; then
 
     setup_polybar_monitor
 
-    if [[ -e /etc/arch-release ]]; then
-        read -r -p "$(echo_c "Run pacman.sh [y/n]? " 3)"
-        if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-            sh "$DOT_ROOT/linux/scripts/pacman.sh"
-        fi
-    fi
-
     if [[ ! -e $HOME/.local/bin/lein ]]; then
         read -r -p "$(echo_c "Run lein_install.sh [y/n]? " 3)"
         if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
