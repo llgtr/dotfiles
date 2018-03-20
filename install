@@ -53,7 +53,7 @@ function link_file {
     fi
 
     echo "$(echo_c "Linking" 6) $src $(echo_c "->" 6) $dst"
-    ln -sf "$src" "$dst"
+    ln -sfn "$src" "$dst"
 }
 
 # Taken from https://github.com/holman/dotfiles/blob/master/script/bootstrap
