@@ -1,0 +1,9 @@
+/elpa
+/auto-save-list
+/games
+/backup
+/eshell
+*#
+*~
+*.elc
+*.eld

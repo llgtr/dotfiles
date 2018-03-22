@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+vol="$(amixer get Master | grep -o -E '[0-9]{1,3}%' | head -n 1)"
+
+mute="$(amixer get Master | grep -o -E '\[[a-z]{2,3}\]' | grep -o -E '[a-z]{2,3}' | head -n 1)"
+
+if [[ $mute == "off" ]]; then
+    echo "Volume: $mute"
+else
+    echo "Volume: $vol"
+fi

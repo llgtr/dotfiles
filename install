@@ -1,0 +1,161 @@
+#!/usr/bin/env bash
+#
+# Install things.
+
+DOT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+
+set -eo pipefail
+
+##################################################
+# Helper function to write out in color
+# Arguments:
+#   $1: String that is written out
+#   $2: tput foreground color
+#   $3: Flag -b for bold text
+# Colors ($2):
+#   0: black, 1: red, 2: green, 3: yellow,
+#   4: blue, 5: magenta, 6: cyan, 7: white
+##################################################
+function echo_c {
+    if [[ $3 == "-b" ]]; then
+        echo "$(tput bold && tput setaf "$2")$1$(tput sgr0)"
+    else
+        echo "$(tput setaf "$2")$1$(tput sgr0)"
+    fi
+}
+
+##################################################
+# Function for linking files and directories.
+# Makes sure that there are no conflicts.
+# Arguments:
+#   None
+##################################################
+function link_file {
+    local src="$DOT_ROOT/$1"; local dst="$HOME/$2"; local dst_dir
+
+    dst_dir=$(dirname "$dst")
+    if [[ ! -e "$dst_dir" ]]; then
+        mkdir -p "$dst_dir"
+    fi
+
+    if [[ -e "$dst" ]] && [[ ! -L "$dst" ]]; then
+        read -r -p \
+            "$(echo_c "File '$dst' already exists. Overwrite [y/n]? " 3)"
+        if [[ ! "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+            return
+        fi
+
+        if [[ -d "$dst" ]]; then
+            rm -rf "$dst"
+        else
+            rm "$dst"
+        fi
+    fi
+
+    echo "$(echo_c "Linking" 6) $src $(echo_c "->" 6) $dst"
+    ln -sfn "$src" "$dst"
+}
+
+# Taken from https://github.com/holman/dotfiles/blob/master/script/bootstrap
+##################################################
+# Sets up git name and email to '.gitconfig.local'
+# Arguments:
+#   None
+##################################################
+function setup_gitconfig {
+  if [[ ! -f $DOT_ROOT/git/gitconfig.local ]]; then
+    echo_c "Configuring name and email for git" 2 -b
+    read -r -p "$(echo_c "What is your git user.name? " 3)" git_authorname
+    read -r -p "$(echo_c "What is your git user.email? " 3)" git_authoremail
+
+    local git_credential='cache'
+    if [[ "$(uname -s)" == "Darwin" ]]; then
+        local git_credential='osxkeychain'
+    fi
+
+    sed -e "s/AUTHORNAME/$git_authorname/g" \
+        -e "s/AUTHOREMAIL/$git_authoremail/g" \
+        -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" \
+        "$DOT_ROOT/git/gitconfig.local.example" > "$DOT_ROOT/git/gitconfig.local"
+  fi
+}
+
+##################################################
+# Sets the monitor for polybar
+# Arguments:
+#   None
+##################################################
+function setup_polybar_monitor {
+    if [[ ! -f $DOT_ROOT/linux/polybar/config ]]; then
+        read -r -p \
+            "$(echo_c "Specify a monitor for polybar (empty for default): " 3)" \
+            monitor
+
+        sed -e "s/MONITOR/$monitor/g" \
+            "$DOT_ROOT/linux/polybar/template" > "$DOT_ROOT/linux/polybar/config"
+    fi
+}
+
+setup_gitconfig # Run git config helper
+
+echo_c "Linking common files." 2 -b
+link_file "sh/bash_profile" ".bash_profile"
+link_file "sh/bashrc" ".bashrc"
+link_file "sh/base16-shell" ".config/base16-shell"
+link_file "sh/zshrc" ".zshrc"
+link_file "sh/zsh/" ".zsh"
+link_file "git/gitconfig" ".gitconfig"
+link_file "git/gitignore" ".gitignore"
+link_file "git/gitconfig.local" ".gitconfig.local"
+link_file "vim/vimrc" ".vimrc"
+link_file "vim/" ".vim"
+link_file "emacs/" ".emacs.d"
+link_file "lein/profiles.clj" ".lein/profiles.clj"
+
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    echo_c "Running MacOS-specific stuff." 2 -b
+
+    link_file "tmux/tmux-mac.conf" ".tmux.conf"
+
+    read -r -p "$(echo_c "Run defaults.sh [y/n]? " 3)"
+    if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+        sh "$DOT_ROOT/mac/defaults.sh"
+    fi
+
+    read -r -p "$(echo_c "Run homebrew.sh [y/n]? " 3)"
+    if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+        sh "$DOT_ROOT/mac/brew/homebrew.sh"
+    fi
+
+    read -r -p "$(echo_c "Run prefs.sh [y/n]? " 3)"
+    if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+        sh "$DOT_ROOT/mac/prefs.sh import"
+    fi
+elif [[ "$(uname -s)" == "Linux" ]]; then
+    echo_c "Running Linux-specific stuff." 2 -b
+
+    link_file "tmux/tmux-linux.conf" ".tmux.conf"
+    link_file "linux/xfce-term/" ".config/xfce4/terminal"
+    link_file "linux/openbox/" ".config/openbox"
+    link_file "linux/x/xinitrc" ".xinitrc"
+    link_file "linux/x/Xresources" ".Xresources"
+    link_file "linux/napapiiri/" ".themes/napapiiri"
+    link_file "linux/i3/" ".config/i3"
+    link_file "linux/polybar/" ".config/polybar"
+    link_file "linux/compton/compton.conf" ".config/compton.conf"
+    link_file "linux/xmonad/" ".xmonad"
+    link_file "linux/rofi/config.rasi" ".config/rofi/config.rasi"
+    link_file "linux/dunst/dunstrc" ".config/dunst/dunstrc"
+    link_file "linux/notify-send.sh/notify-send.sh" ".local/bin/notify-send.sh"
+
+    setup_polybar_monitor
+
+    if [[ ! -e $HOME/.local/bin/lein ]]; then
+        read -r -p "$(echo_c "Run lein_install.sh [y/n]? " 3)"
+        if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+            sh "$DOT_ROOT/linux/scripts/lein_install.sh"
+        fi
+    fi
+fi
+
+echo_c "Done." 2 -b
