@@ -98,6 +98,8 @@ function setup_polybar_monitor {
 
 setup_gitconfig # Run git config helper
 
+git submodule update --init --recursive --remote
+
 echo_c "Linking common files." 2 -b
 link_file "sh/bash_profile" ".bash_profile"
 link_file "sh/bashrc" ".bashrc"
