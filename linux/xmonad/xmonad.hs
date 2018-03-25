@@ -31,6 +31,7 @@ startUp =
 
 myManageHook = composeAll
     [ className =? "Thunar" --> doFloat
+    , className =? "Ristretto" --> doFloat
     ]
 
 myConfig = def
