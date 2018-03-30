@@ -1,9 +1,9 @@
 # Brewfile to be used with `brew bundle`
 
 # Taps
-tap "caskroom/cask"
 tap "homebrew/bundle"
 tap "homebrew/core"
+tap "caskroom/cask"
 
 # Formulae
 brew "git"
@@ -16,6 +16,11 @@ brew "python"
 brew "python3"
 brew "leiningen"
 brew "stack"
+brew "zsh"
+brew "tree"
+brew "yarn"
+brew "pandoc"
+
 #brew "emacs", args: ["with-cocoa", "with-gnutls"]
 
 # Casks
@@ -24,3 +29,4 @@ cask "iterm2"
 cask "firefox"
 cask "mactex"
 cask "emacs"
+cask "wireshark"
