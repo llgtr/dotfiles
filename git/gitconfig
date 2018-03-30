@@ -19,6 +19,9 @@
 [diff "bin"]
     textconv = hexdump -v -C
 
+[push]
+    default = current
+
 [alias]
     a = add
     aa = add -A
