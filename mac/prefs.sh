@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-SCRIPT_ROOT="$(cd "$(dirname "$0")" && pwd -P)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 set -eo pipefail
 
-for i in $SCRIPT_ROOT/plists/*; do
+for i in $SCRIPT_DIR/plists/*; do
     filename="$(basename $i)"
     dst_file="$HOME/Library/Preferences/$filename"
     case "$1" in

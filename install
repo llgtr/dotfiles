@@ -2,7 +2,7 @@
 #
 # Install things.
 
-DOT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 set -eo pipefail
 
@@ -31,7 +31,7 @@ function echo_c {
 #   None
 ##################################################
 function link_file {
-    local src="$DOT_ROOT/$1"; local dst="$HOME/$2"; local dst_dir
+    local src="$SCRIPT_DIR/$1"; local dst="$HOME/$2"; local dst_dir
 
     dst_dir=$(dirname "$dst")
     if [[ ! -e "$dst_dir" ]]; then
@@ -63,7 +63,7 @@ function link_file {
 #   None
 ##################################################
 function setup_gitconfig {
-  if [[ ! -f $DOT_ROOT/git/gitconfig.local ]]; then
+  if [[ ! -f $SCRIPT_DIR/git/gitconfig.local ]]; then
     echo_c "Configuring name and email for git" 2 -b
     read -r -p "$(echo_c "What is your git user.name? " 3)" git_authorname
     read -r -p "$(echo_c "What is your git user.email? " 3)" git_authoremail
@@ -76,7 +76,7 @@ function setup_gitconfig {
     sed -e "s/AUTHORNAME/$git_authorname/g" \
         -e "s/AUTHOREMAIL/$git_authoremail/g" \
         -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" \
-        "$DOT_ROOT/git/gitconfig.local.example" > "$DOT_ROOT/git/gitconfig.local"
+        "$SCRIPT_DIR/git/gitconfig.local.example" > "$SCRIPT_DIR/git/gitconfig.local"
   fi
 }
 
@@ -86,13 +86,13 @@ function setup_gitconfig {
 #   None
 ##################################################
 function setup_polybar_monitor {
-    if [[ ! -f $DOT_ROOT/linux/polybar/config ]]; then
+    if [[ ! -f $SCRIPT_DIR/linux/polybar/config ]]; then
         read -r -p \
             "$(echo_c "Specify a monitor for polybar (empty for default): " 3)" \
             monitor
 
         sed -e "s/MONITOR/$monitor/g" \
-            "$DOT_ROOT/linux/polybar/template" > "$DOT_ROOT/linux/polybar/config"
+            "$SCRIPT_DIR/linux/polybar/template" > "$SCRIPT_DIR/linux/polybar/config"
     fi
 }
 
@@ -121,17 +121,17 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 
     read -r -p "$(echo_c "Run defaults.sh [y/n]? " 3)"
     if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-        sh "$DOT_ROOT/mac/defaults.sh"
+        sh "$SCRIPT_DIR/mac/defaults.sh"
     fi
 
     read -r -p "$(echo_c "Run homebrew.sh [y/n]? " 3)"
     if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-        sh "$DOT_ROOT/mac/brew/homebrew.sh"
+        sh "$SCRIPT_DIR/mac/brew/homebrew.sh"
     fi
 
     read -r -p "$(echo_c "Run prefs.sh [y/n]? " 3)"
     if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-        sh "$DOT_ROOT/mac/prefs.sh import"
+        sh "$SCRIPT_DIR/mac/prefs.sh import"
     fi
 elif [[ "$(uname -s)" == "Linux" ]]; then
     echo_c "Running Linux-specific stuff." 2 -b
@@ -155,7 +155,7 @@ elif [[ "$(uname -s)" == "Linux" ]]; then
     if [[ ! -e $HOME/.local/bin/lein ]]; then
         read -r -p "$(echo_c "Run lein_install.sh [y/n]? " 3)"
         if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-            sh "$DOT_ROOT/linux/scripts/lein_install.sh"
+            sh "$SCRIPT_DIR/linux/scripts/lein_install.sh"
         fi
     fi
 fi

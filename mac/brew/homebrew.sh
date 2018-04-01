@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SCRIPT_ROOT="$(cd "$(dirname "$0")" && pwd -P)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 set -e
 
@@ -11,4 +11,4 @@ fi
 
 brew doctor
 
-brew bundle --file="$SCRIPT_ROOT/Brewfile"
+brew bundle --file="$SCRIPT_DIR/Brewfile"
