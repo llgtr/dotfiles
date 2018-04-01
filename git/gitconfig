@@ -24,9 +24,10 @@
 
 [alias]
     a = add
-    ap = add -p
+    ap = add --patch
 
     pu = push
+    puf = push --force
     # Push current branch to origin and track upstream
     pub = "!git push -u origin $(git symbolic-ref --short HEAD)"
 
@@ -51,17 +52,17 @@
     stp = stash pop
 
     l = log --pretty=oneline --graph --abbrev-commit
-    sh = shortlog -sn
-    fl = log -u
+    sh = shortlog --summary --numbered
+    fl = log --patch
 
     b = branch
 
     cp = cherry-pick
-    ri = rebase -i
+    ri = rebase --interactive
 
     un = reset HEAD --
 
     g = grep
-    gci = grep -ci
+    gci = grep --count --ignore-case
 
 # vim: set filetype=gitconfig :
