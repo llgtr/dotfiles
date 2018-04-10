@@ -18,6 +18,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 set incsearch
+set hlsearch
 set lazyredraw
 set colorcolumn=80
 set ruler
