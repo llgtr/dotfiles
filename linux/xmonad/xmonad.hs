@@ -15,15 +15,11 @@ import Data.List
 
 import MyKeyBindings
 
-main :: IO ()
+main :: IO()
 main =
   xmonad
     $ withNavigation2DConfig def { layoutNavigation = [("BSP", hybridNavigation)] }
     $ myConfig
-
-backgroundColor   = "#f2f0ec"
-middleColor       = "#a09f93"
-foregroundColor   = "#393939"
 
 startUp :: X()
 startUp =
@@ -35,8 +31,7 @@ myManageHook = composeAll
     ]
 
 myConfig = def
-  { borderWidth        = 1
-  , focusedBorderColor = foregroundColor
+  { borderWidth        = 0
   , focusFollowsMouse  = True
   , handleEventHook    = docksEventHook
   , keys               = myKeys
@@ -44,7 +39,6 @@ myConfig = def
   , manageHook         = manageDocks <+> myManageHook
   , startupHook        = startUp
   , modMask            = mod4Mask
-  , normalBorderColor  = middleColor
   , clickJustFocuses   = False
   , terminal           = "urxvt"
   , workspaces         = [ "1", "2", "3", "4", "5" ]
