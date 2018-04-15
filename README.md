@@ -4,10 +4,12 @@ Run `install` to get started.
 
 ### Credits/Thanks
 
-* [Mathias Bynens' .macos script](https://github.com/mathiasbynens/dotfiles/blob/master/.macos)
+* [mathiasbynens' .macos script](https://github.com/mathiasbynens/dotfiles/blob/master/.macos)
 
 * [nobootsound](https://github.com/teored90/nobootsound)
 
-* [Holman's bootstrap](https://github.com/holman/dotfiles/blob/master/script/bootstrap)
+* [holman's bootstrap](https://github.com/holman/dotfiles/blob/master/script/bootstrap)
 
 * [base16](https://github.com/chriskempson/base16)
+
+* [rleppink's xmonad configs](https://github.com/rleppink/dotfiles/blob/master/xmonad/xmonad.hs)
