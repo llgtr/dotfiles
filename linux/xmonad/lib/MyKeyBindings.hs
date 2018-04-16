@@ -10,8 +10,13 @@ import XMonad.Layout.BinarySpacePartition
 import XMonad.Layout.ToggleLayouts
 
 import XMonad.Util.CustomKeys
+import XMonad.Util.Run
 
 import Graphics.X11.ExtraTypes.XF86
+
+import qualified XMonad.StackSet as W
+
+notifyString = "~/.local/bin/notify-send.sh --replace-file=/tmp/xmon "
 
 myKeys = customKeys removedKeys addedKeys
 
@@ -25,23 +30,20 @@ removedKeys XConfig {modMask = modm} =
 addedKeys :: XConfig l -> [((KeyMask, KeySym), X ())]
 addedKeys conf @ XConfig {modMask = modm} =
   [
-    ((modm, xK_space)                , spawn "rofi -show drun") -- Rofi
-  , ((mod1Mask .|. controlMask, xK_t), spawn $ XMonad.terminal conf) -- Terminal
-  , ((mod1Mask .|. controlMask, xK_e), spawn "emacs")
-  , ((mod1Mask .|. controlMask, xK_f), spawn "firefox")
+    ((modm, xK_space)                , safeSpawn "rofi" ["-show", "drun"])
+  , ((mod1Mask .|. controlMask, xK_t), safeSpawnProg $ XMonad.terminal conf)
+  , ((mod1Mask .|. controlMask, xK_e), safeSpawnProg "emacs")
+  , ((mod1Mask .|. controlMask, xK_f), safeSpawnProg "firefox")
   , ((modm, xK_s)                    , spawn "sleep 0.2; scrot -s -e 'mv $f ~/Pictures/screencaps/'")
 
   , ((0, xF86XK_AudioRaiseVolume), spawn
-      "amixer -D pulse set Master 5%+ unmute; \
-      \ $(~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(. ~/.xmonad/vol)\" -u low)")
+      ("$(" ++ notifyString ++ "\"$(. ~/.xmonad/vol raise)\" -u low)"))
   , ((0, xF86XK_AudioLowerVolume), spawn
-      "amixer -D pulse set Master 5%- unmute; \
-      \ $(~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(. ~/.xmonad/vol)\" -u low)")
+      ("$(" ++ notifyString ++ "\"$(. ~/.xmonad/vol lower)\" -u low)"))
   , ((0, xF86XK_AudioMute), spawn
-      "amixer -D pulse set Master toggle; \
-      \ $(~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(. ~/.xmonad/vol)\" -u low)")
+      ("$(" ++ notifyString ++ "\"$(. ~/.xmonad/vol mute)\" -u low)"))
   , ((modm, xK_d), spawn
-      "$(~/.local/bin/notify-send.sh --replace-file=/tmp/xmon \"$(date '+%A, %d %B %H:%M')\" -u low)")
+      ("$(" ++ notifyString ++ "\"$(date '+%A, %d %B %H:%M')\" -u low)"))
   -- TODO: Add battery notification and notifications for workspace changes
 
   , ((modm, xK_w)     , kill) -- Close application
