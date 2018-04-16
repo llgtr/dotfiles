@@ -44,7 +44,7 @@ addedKeys conf @ XConfig {modMask = modm} =
       ("$(" ++ notifyString ++ "\"$(. ~/.xmonad/vol mute)\" -u low)"))
   , ((modm, xK_d), spawn
       ("$(" ++ notifyString ++ "\"$(date '+%A, %d %B %H:%M')\" -u low)"))
-  -- TODO: Add battery notification and notifications for workspace changes
+  -- TODO: Add battery notification
 
   , ((modm, xK_w)     , kill) -- Close application
   , ((modm, xK_Tab)   , toggleWS) -- Switch to last workspace
@@ -67,4 +67,12 @@ addedKeys conf @ XConfig {modMask = modm} =
   , ((modm .|. controlMask .|. shiftMask , xK_j), sendMessage $ ShrinkFrom D)
   , ((modm .|. controlMask .|. shiftMask , xK_k), sendMessage $ ShrinkFrom U)
   ]
+
+  ++
+
+  [((m .|. modm, k), sequence_
+     [spawn ("$(" ++ notifyString ++ "\"Workspace: " ++ i ++ "\")")
+     , (windows $ f i)])
+         | (i, k) <- zip (XMonad.workspaces conf) [xK_1..]
+         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
