@@ -25,12 +25,15 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 prompt_setup() {
+    PROMPT_EOL_MARK=''
+
     DEF_PROMPT="[%~]: "
     SSH_PROMPT="%F{245}(%F{003}%n%F{245}@%F{016}%m%F{245})%f ${DEF_PROMPT}"
 
     [[ -n $SSH_CONNECTION ]] && PROMPT="${SSH_PROMPT}" && return
 
     PROMPT="${DEF_PROMPT}"
+    RPROMPT=""
 }
 
 prompt_setup
