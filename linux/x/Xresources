@@ -4,7 +4,7 @@
 
 ! U-Rxvt
 
-URxvt.font: xft:xos4 terminus:size=12
+URxvt.font: xft:Iosevka Term:size=12
 URxvt.letterSpace: 0
 URxvt.scrollBar: false
 URxvt.geometry: 80x40
