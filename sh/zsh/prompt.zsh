@@ -1,20 +1,8 @@
-git_branch() {
-    command git rev-parse --is-inside-work-tree &>/dev/null || return
+# Prompt.zsh
+#
+# Note: Config variables are sourced from config.zsh
 
-    echo " %F{245}$(git rev-parse --abbrev-ref HEAD)%f"
-}
-
-check_jobs() {
-    [[ -n $(jobs) ]] && echo " %F{yellow}+%f"
-}
-
-rprompt_vi_git() {
-    local V_P="%F{002}N%f"
-    RPROMPT="${${KEYMAP/vicmd/$V_P}/(main|viins)/}`git_branch``check_jobs`"
-    zle reset-prompt
-}
-
-# Taken from the pure prompt
+# https://github.com/sindresorhus/pretty-time-zsh
 cmd_execution_time() {
     local stop=$EPOCHSECONDS
     (( elapsed = ${stop} - ${cmd_start_time:-$EPOCHSECONDS} ))
@@ -29,6 +17,7 @@ cmd_execution_time() {
 	(( minutes > 0 )) && human+="${minutes}m "
     human+="${seconds}s"
 
+    # Output: Execution time and timestamp (ISO 8601)
     (( $elapsed > $REPORTTIME_TOTAL )) && print -P \
         "%F{yellow}${human}%f %F{245}-> $(date -u +"%Y-%m-%dT%H:%M:%SZ")%f"
 }
@@ -43,11 +32,81 @@ precmd() {
     fi
 }
 
+check_git_branch_dirty() {
+    builtin cd -q $1
+
+    command git rev-parse --is-inside-work-tree &>/dev/null || return
+
+    test -z "$(git status --porcelain -unormal)"
+    [[ $? -ne 0 ]] && local dirty_marker="*"
+
+    echo " %F{245}$(git rev-parse --abbrev-ref HEAD)${dirty_marker}%f"
+}
+
+check_jobs() {
+    [[ -n $(jobs) ]] && echo " %F{yellow}+%f"
+}
+
+set_vi_status() {
+    local V_P="%F{002}N%f"
+    prompt_vi_status="${${KEYMAP/vicmd/$V_P}/(main|viins)/}"
+    rprompt_draw
+}
+
+rprompt_draw() {
+    RPROMPT="${prompt_vi_status}${prompt_git_status}`check_jobs`"
+
+    zle reset-prompt
+}
+
+prompt_async_start() {
+    # Flush previous jobs before starting a new one
+    async_flush_jobs prompt_async_git_checker
+
+    # Clear prompt
+    prompt_git_status=""
+    prompt_vi_status=""
+    rprompt_draw
+
+    # Start new job
+    async_job prompt_async_git_checker check_git_branch_dirty $PWD
+}
+
+prompt_async_callback() {
+    # Get result from the job exection
+    prompt_git_status=$3
+
+    # Redraw prompt
+    rprompt_draw
+}
+
+prompt_async_init() {
+    async_init
+    async_start_worker prompt_async_git_checker -n
+    async_register_callback prompt_async_git_checker prompt_async_callback
+}
+
+rprompt_simple() {
+    local V_P="%F{002}N%f"
+    RPROMPT="${${KEYMAP/vicmd/$V_P}/(main|viins)/}`check_jobs`"
+    zle reset-prompt
+}
+
 prompt_setup() {
     zmodload zsh/datetime
 
-    zle -N zle-line-init rprompt_vi_git
-    zle -N zle-keymap-select rprompt_vi_git
+    if (( $SET_ASYNC )); then
+        zle -N zle-line-init prompt_async_start
+        zle -N zle-keymap-select set_vi_status
+
+        typeset -g prompt_vi_status # Stores latest keymap status
+        typeset -g prompt_git_status # Stores latest git status
+
+        prompt_async_init
+    else
+        zle -N zle-line-init rprompt_simple
+        zle -N zle-keymap-select rprompt_simple
+    fi
 
     PROMPT_EOL_MARK='' # Cleaner output if it doesn't end with a newline
     RPROMPT="" # Set this here so that RPROMPT works on the first line
