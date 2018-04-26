@@ -44,7 +44,8 @@ prompt_setup() {
     zle -N zle-line-init rprompt_vi_git
     zle -N zle-keymap-select rprompt_vi_git
 
-    PROMPT_EOL_MARK=''
+    PROMPT_EOL_MARK='' # Cleaner output if it doesn't end with a newline
+    RPROMPT="" # Set this here so that RPROMPT works on the first line
 
     DEF_PROMPT="%B%F{006}%~%f%b "
     SSH_PROMPT="%F{245}(%F{004}%n%F{245}@%F{004}%m%F{245})%f ${DEF_PROMPT}"
@@ -52,7 +53,6 @@ prompt_setup() {
     [[ -n $SSH_CONNECTION ]] && PROMPT="${SSH_PROMPT}" && return
 
     PROMPT="${DEF_PROMPT}"
-    RPROMPT=""
 }
 
 prompt_setup
