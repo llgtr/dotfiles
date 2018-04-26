@@ -48,7 +48,7 @@ prompt_setup() {
     PROMPT_EOL_MARK='' # Cleaner output if it doesn't end with a newline
     RPROMPT="" # Set this here so that RPROMPT works on the first line
 
-    DEF_PROMPT="%B%F{006}%~%f%b "
+    DEF_PROMPT="%B%(?..%F{001}!%f )%F{006}%~%f%b "
     USER_PROMPT="%n%F{245} at %F{004}%m%F{245} in%f ${DEF_PROMPT}"
 
     [[ -n $SSH_CONNECTION ]] && PROMPT="%F{004}${USER_PROMPT}" && return
