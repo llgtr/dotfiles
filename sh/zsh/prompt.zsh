@@ -4,9 +4,13 @@ git_branch() {
     echo " %F{245}$(git rev-parse --abbrev-ref HEAD)%f"
 }
 
+check_jobs() {
+    [[ -n $(jobs) ]] && echo " %F{yellow}+%f"
+}
+
 rprompt_vi_git() {
-    V_P="%F{002}N%f"
-    RPROMPT="${${KEYMAP/vicmd/$V_P}/(main|viins)/}`git_branch`"
+    local V_P="%F{002}N%f"
+    RPROMPT="${${KEYMAP/vicmd/$V_P}/(main|viins)/}`git_branch``check_jobs`"
     zle reset-prompt
 }
 
