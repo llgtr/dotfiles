@@ -48,9 +48,11 @@ prompt_setup() {
     RPROMPT="" # Set this here so that RPROMPT works on the first line
 
     DEF_PROMPT="%B%F{006}%~%f%b "
-    SSH_PROMPT="%F{245}(%F{004}%n%F{245}@%F{004}%m%F{245})%f ${DEF_PROMPT}"
+    USER_PROMPT="%n%F{245} at %F{004}%m%F{245} in%f ${DEF_PROMPT}"
 
-    [[ -n $SSH_CONNECTION ]] && PROMPT="${SSH_PROMPT}" && return
+    [[ -n $SSH_CONNECTION ]] && PROMPT="%F{004}${USER_PROMPT}" && return
+
+    [[ $UID -eq 0 ]] && PROMPT="%F{001}${USER_PROMPT}" && return
 
     PROMPT="${DEF_PROMPT}"
 }
