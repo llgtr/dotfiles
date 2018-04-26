@@ -10,6 +10,7 @@ rprompt_vi_git() {
     zle reset-prompt
 }
 
+# Taken from the pure prompt
 cmd_execution_time() {
     local stop=$EPOCHSECONDS
     (( elapsed = ${stop} - ${cmd_start_time:-$EPOCHSECONDS} ))
