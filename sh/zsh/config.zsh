@@ -15,6 +15,7 @@ zstyle ':completion:*' insert-tab pending
 
 REPORTTIME=10 # Will show a readout when system+user time passes the value
 REPORTTIME_TOTAL=10 # Will show a readout when total time passes the value
+SET_ASYNC=1 # Set this to zero to disable async prompt
 
 KEYTIMEOUT=1
 
