@@ -20,6 +20,8 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # => MacOS
-alias showAll='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'
-alias hideAll='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    alias showAll='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'
+    alias hideAll='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'
+fi
 
