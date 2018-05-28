@@ -8,7 +8,6 @@ tap "caskroom/cask"
 # Formulae
 brew "git"
 brew "htop"
-brew "rust"
 brew "valgrind"
 brew "tmux"
 brew "vim"
