@@ -19,14 +19,13 @@ brew "zsh"
 brew "tree"
 brew "yarn"
 brew "pandoc"
-#brew "emacs", args: ["with-cocoa", "with-gnutls"]
+brew "emacs", args: ["with-cocoa"]
 
 # Casks
 cask "java"
 cask "iterm2"
 cask "firefox"
 cask "mactex"
-cask "emacs"
 cask "wireshark"
 cask "spotify"
 cask "dash"
