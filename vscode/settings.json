@@ -1,0 +1,18 @@
+{
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "editor.fontSize": 12,
+    "editor.fontFamily": "'Iosevka Term', monospace",
+    "editor.renderWhitespace": "boundary",
+    "editor.cursorBlinking": "solid",
+    "editor.formatOnPaste": true,
+    "editor.renderLineHighlight": "gutter",
+    "editor.rulers": [80, 100],
+    "workbench.colorTheme": "Tomorrow Night Eighties",
+    "workbench.activityBar.visible": true,
+    "workbench.editor.showIcons": false,
+    "workbench.iconTheme": null,
+    "extensions.ignoreRecommendations": true,
+    "vim.cmdLineInitialColon": true,
+    "vim.ignorecase": false,
+}
