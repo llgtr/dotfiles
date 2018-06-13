@@ -50,6 +50,7 @@
 
     st = stash
     stp = stash pop
+    stl = stash list
 
     l = log --pretty=oneline --graph --abbrev-commit
     sh = shortlog --summary --numbered
