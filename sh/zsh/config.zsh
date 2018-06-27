@@ -31,6 +31,7 @@ setopt HIST_IGNORE_ALL_DUPS # Only keep most recent duplicate of command
 setopt HIST_REDUCE_BLANKS # Remove superfluous blanks
 setopt EXTENDED_HISTORY # Save commands timestamp and duration
 setopt HIST_VERIFY # Dont execute outright when entering line w/ hist expansion
+setopt CHASE_LINKS # Resolve symlinks to their true values
 
 # => Basics
 setopt NO_LIST_BEEP # Dont beep on an ambiguous completion
