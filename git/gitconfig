@@ -39,6 +39,7 @@
     can = commit --amend --no-edit
 
     co = checkout
+    cob = checkout -b
 
     d = diff
     dc = diff --cached
