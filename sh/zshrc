@@ -1,4 +1,2 @@
 # Source all relevant files
 for config ($HOME/.zsh/*.zsh) source $config
-
-export PATH="${PATH}:${HOME}/.local/bin:${HOME}/.cargo/bin"
