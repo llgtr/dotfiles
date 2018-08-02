@@ -58,6 +58,8 @@
     fl = log --patch
 
     b = branch
+    bd = branch --delete
+    bdf = branch --delete --force
 
     cp = cherry-pick
     ri = rebase --interactive
