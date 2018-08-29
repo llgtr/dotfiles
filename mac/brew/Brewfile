@@ -20,6 +20,7 @@ brew "tree"
 brew "yarn"
 brew "pandoc"
 brew "emacs", args: ["with-cocoa"]
+brew "the_silver_searcher"
 
 # Casks
 cask "java"
