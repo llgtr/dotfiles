@@ -43,5 +43,6 @@ RUN git clone https://github.com/be5invis/Iosevka.git
 WORKDIR /tmp/Iosevka
 
 COPY docker-iosevka.sh /
+COPY private-build-plans.toml .
 CMD ["/docker-iosevka.sh"]
 
