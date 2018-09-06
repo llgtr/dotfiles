@@ -22,8 +22,9 @@ main =
     $ myConfig
 
 startUp :: X()
-startUp =
+startUp = do
     spawnOnce "nitrogen --restore"
+    spawnOnce "setxkbmap -option caps:escape"
 
 myManageHook = composeAll
     [ className =? "Thunar" --> doFloat
