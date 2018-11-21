@@ -6,9 +6,6 @@ osascript -e 'tell application "System Preferences" to quit'
 # Ask for the administrator password upfront
 sudo -v
 
-# Mute boot chime.
-sudo ./mac/mute.sh
-
 # Set highlight color
 defaults write NSGlobalDomain AppleHighlightColor -string "0.5882 0.8824 0.8824"
 
