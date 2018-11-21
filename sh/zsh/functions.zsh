@@ -3,11 +3,11 @@
 # $2: tput color code
 # $3: flag for bold text
 function echo_c {
-    if [[ $3 == "-b" ]]; then
-        echo "$(tput bold && tput setaf $2)$1$(tput sgr0)"
-    else
-        echo "$(tput setaf $2)$1$(tput sgr0)"
-    fi
+    local setcolor="$(tput setaf "$2")"
+    local setnormal="$(tput sgr0)"
+    [[ ${3:-} == "-b" ]] && local setbold="$(tput bold)"
+
+    echo "${setbold:-}${setcolor}$1${setnormal}"
 }
 
 # Timer for various simple timing needs.
