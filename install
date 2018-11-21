@@ -36,7 +36,12 @@ function link_file {
         mkdir -p "$dst_dir"
     fi
 
-    if [[ -e "$dst" ]] && [[ ! -L "$dst" ]]; then
+    # More compatible than ln -sfn/-sfh
+    if [[ -L "$dst" ]]; then
+        unlink "$dst"
+    fi
+
+    if [[ -e "$dst" ]]; then
         read -r -p \
             "$(echo_c "File '$dst' already exists. Overwrite [y/n]? " 3)"
         if [[ ! "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
@@ -48,11 +53,6 @@ function link_file {
         else
             rm "$dst"
         fi
-    fi
-
-    # More compatible than ln -sfn/-sfh
-    if [[ -L "$dst" ]]; then
-        unlink "$dst"
     fi
 
     echo "$(echo_c "Linking" 6) $src $(echo_c "->" 6) $dst"
