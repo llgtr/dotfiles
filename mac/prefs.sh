@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+set -euo pipefail
 
-set -eo pipefail
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 for i in $SCRIPT_DIR/plists/*; do
     filename="$(basename $i)"

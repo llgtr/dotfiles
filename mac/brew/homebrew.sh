@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+set -euo pipefail
 
-set -e
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 if ! [[ -x "$(command -v brew)" ]]; then
     /usr/bin/ruby -e "$(curl -fsSL \

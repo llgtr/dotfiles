@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 EXTENSIONS=(
     ms-vscode.Theme-TomorrowKit
     vscodevim.vim
