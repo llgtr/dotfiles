@@ -16,9 +16,10 @@ set -euo pipefail
 #   4: blue, 5: magenta, 6: cyan, 7: white
 ##################################################
 function echo_c {
-    local setcolor="$(tput setaf "$2")"
-    local setnormal="$(tput sgr0)"
-    [[ ${3:-} == "-b" ]] && local setbold="$(tput bold)"
+    local setcolor; local setnormal; local setbold
+    setcolor="$(tput setaf "$2")"
+    setnormal="$(tput sgr0)"
+    [[ ${3:-} == "-b" ]] && setbold="$(tput bold)"
 
     echo "${setbold:-}${setcolor}$1${setnormal}"
 }
@@ -29,9 +30,10 @@ function echo_c {
 #   $2: Destination
 ##################################################
 function link_file {
-    local src="$SCRIPT_DIR/$1"; local dst="$HOME/$2"
+    local src; local dst; local dst_dir
+    src="$SCRIPT_DIR/$1"; dst="$HOME/$2"
 
-    local dst_dir=$(dirname "$dst")
+    dst_dir=$(dirname "$dst")
     if [[ ! -e "$dst_dir" ]]; then
         mkdir -p "$dst_dir"
     fi
