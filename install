@@ -7,7 +7,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 set -euo pipefail
 
 ##################################################
-# Helper function to write out in color
 # Arguments:
 #   $1: String that is written out
 #   $2: tput foreground color
@@ -17,7 +16,7 @@ set -euo pipefail
 #   4: blue, 5: magenta, 6: cyan, 7: white
 ##################################################
 function echo_c {
-    if [[ $3 == "-b" ]]; then
+    if [[ ${3:-} == "-b" ]]; then
         echo "$(tput bold && tput setaf "$2")$1$(tput sgr0)"
     else
         echo "$(tput setaf "$2")$1$(tput sgr0)"
@@ -25,15 +24,14 @@ function echo_c {
 }
 
 ##################################################
-# Function for linking files and directories.
-# Makes sure that there are no conflicts.
 # Arguments:
-#   None
+#   $1: Source
+#   $2: Destination
 ##################################################
 function link_file {
-    local src="$SCRIPT_DIR/$1"; local dst="$HOME/$2"; local dst_dir
+    local src="$SCRIPT_DIR/$1"; local dst="$HOME/$2"
 
-    dst_dir=$(dirname "$dst")
+    local dst_dir=$(dirname "$dst")
     if [[ ! -e "$dst_dir" ]]; then
         mkdir -p "$dst_dir"
     fi
@@ -52,13 +50,17 @@ function link_file {
         fi
     fi
 
+    # More compatible than ln -sfn/-sfh
+    if [[ -L "$dst" ]]; then
+        unlink "$dst"
+    fi
+
     echo "$(echo_c "Linking" 6) $src $(echo_c "->" 6) $dst"
-    ln -sfn "$src" "$dst"
+    ln -s "$src" "$dst"
 }
 
 # Taken from https://github.com/holman/dotfiles/blob/master/script/bootstrap
 ##################################################
-# Sets up git name and email to '.gitconfig.local'
 # Arguments:
 #   None
 ##################################################
@@ -81,7 +83,6 @@ function setup_gitconfig {
 }
 
 ##################################################
-# Sets the monitor for polybar
 # Arguments:
 #   None
 ##################################################
