@@ -10,18 +10,36 @@ set -euo pipefail
 # Arguments:
 #   $1: String that is written out
 #   $2: tput foreground color
-#   $3: Flag -b for bold text
+#   $3: Flag -b for bold text (optional)
 # Colors ($2):
 #   0: black, 1: red, 2: green, 3: yellow,
 #   4: blue, 5: magenta, 6: cyan, 7: white
 ##################################################
 function echo_c {
-    local setcolor; local setnormal; local setbold
+    local setcolor setnormal setbold
     setcolor="$(tput setaf "$2")"
     setnormal="$(tput sgr0)"
     [[ ${3:-} == "-b" ]] && setbold="$(tput bold)"
 
-    echo "${setbold:-}${setcolor}$1${setnormal}"
+    printf "%s%s%s%s\\n" "${setbold:-}" "${setcolor}" "$1" "${setnormal}"
+}
+
+##################################################
+# Arguments:
+#   $1: Prompt string
+#   $2: nchars to read (0 to disable)
+#   $3: Reply variable (optional)
+##################################################
+function ask_user {
+    printf "%s" "$(echo_c "$1 " 3)"
+    if [[ "${3:-}" ]]; then
+        read -r -n "$2" "$3"
+    else
+        read -r -n "$2"
+    fi
+    if [[ "$2" != 0 ]]; then
+        echo
+    fi
 }
 
 ##################################################
@@ -30,7 +48,7 @@ function echo_c {
 #   $2: Destination
 ##################################################
 function link_file {
-    local src; local dst; local dst_dir
+    local src dst dst_dir
     src="$SCRIPT_DIR/$1"; dst="$HOME/$2"
 
     dst_dir=$(dirname "$dst")
@@ -38,15 +56,9 @@ function link_file {
         mkdir -p "$dst_dir"
     fi
 
-    # More compatible than ln -sfn/-sfh
-    if [[ -L "$dst" ]]; then
-        unlink "$dst"
-    fi
-
-    if [[ -e "$dst" ]]; then
-        read -r -p \
-            "$(echo_c "File '$dst' already exists. Overwrite [y/n]? " 3)"
-        if [[ ! "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+    if [[ -e "$dst" && ! -L "$dst" ]]; then
+        ask_user "File '$dst' already exists. Do you want to overwrite [y/n]?" 1
+        if [[ ! "$REPLY" =~ [yY] ]]; then
             return
         fi
 
@@ -58,7 +70,7 @@ function link_file {
     fi
 
     echo "$(echo_c "Linking" 6) $src $(echo_c "->" 6) $dst"
-    ln -s "$src" "$dst"
+    ln -sfn "$src" "$dst"
 }
 
 # Taken from https://github.com/holman/dotfiles/blob/master/script/bootstrap
@@ -69,8 +81,9 @@ function link_file {
 function setup_gitconfig {
   if [[ ! -f $SCRIPT_DIR/git/gitconfig.local ]]; then
     echo_c "Configuring name and email for git" 2 -b
-    read -r -p "$(echo_c "What is your git user.name? " 3)" git_authorname
-    read -r -p "$(echo_c "What is your git user.email? " 3)" git_authoremail
+    local git_authorname git_authoremail
+    ask_user "What is your git user.name?" 0 git_authorname
+    ask_user "What is your git user.email?" 0 git_authoremail
 
     local git_credential='cache'
     if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -84,24 +97,10 @@ function setup_gitconfig {
   fi
 }
 
-##################################################
-# Arguments:
-#   None
-##################################################
-function setup_polybar_monitor {
-    if [[ ! -f $SCRIPT_DIR/linux/polybar/config ]]; then
-        read -r -p \
-            "$(echo_c "Specify a monitor for polybar (empty for default): " 3)" \
-            monitor
-
-        sed -e "s/MONITOR/$monitor/g" \
-            "$SCRIPT_DIR/linux/polybar/template" > "$SCRIPT_DIR/linux/polybar/config"
-    fi
-}
-
-setup_gitconfig # Run git config helper
+setup_gitconfig
 
 echo_c "Linking common files." 2 -b
+
 link_file "sh/bash_profile" ".bash_profile"
 link_file "sh/bashrc" ".bashrc"
 link_file "sh/base16-shell" ".config/base16-shell"
@@ -122,19 +121,19 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 
     link_file "tmux/tmux-mac.conf" ".tmux.conf"
 
-    read -r -p "$(echo_c "Run defaults.sh [y/n]? " 3)"
-    if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-        sh "$SCRIPT_DIR/mac/defaults.sh"
+    ask_user "Run defaults.sh [y/n]?" 1
+    if [[ "$REPLY" =~ [yY] ]]; then
+        sh "$SCRIPT_DIR/mac/defaults.sh" || true
     fi
 
-    read -r -p "$(echo_c "Run homebrew.sh [y/n]? " 3)"
-    if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-        sh "$SCRIPT_DIR/mac/brew/homebrew.sh"
+    ask_user "Run homebrew.sh [y/n]?" 1
+    if [[ "$REPLY" =~ [yY] ]]; then
+        sh "$SCRIPT_DIR/mac/brew/homebrew.sh" || true
     fi
 
-    read -r -p "$(echo_c "Run prefs.sh [y/n]? " 3)"
-    if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-        sh "$SCRIPT_DIR/mac/prefs.sh import"
+    ask_user "Run prefs.sh [y/n]?" 1
+    if [[ "$REPLY" =~ [yY] ]]; then
+        sh "$SCRIPT_DIR/mac/prefs.sh import" || true
     fi
 elif [[ "$(uname -s)" == "Linux" ]]; then
     echo_c "Running Linux-specific stuff." 2 -b
@@ -153,11 +152,9 @@ elif [[ "$(uname -s)" == "Linux" ]]; then
     link_file "linux/dunst/dunstrc" ".config/dunst/dunstrc"
     link_file "linux/notify-send.sh/notify-send.sh" ".local/bin/notify-send.sh"
 
-    setup_polybar_monitor
-
     if [[ ! -e $HOME/.local/bin/lein ]]; then
-        read -r -p "$(echo_c "Run lein_install.sh [y/n]? " 3)"
-        if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+        ask_user "Run lein_install.sh [y/n]?" 1
+        if [[ "$REPLY" =~ [yY] ]]; then
             sh "$SCRIPT_DIR/linux/scripts/lein_install.sh"
         fi
     fi
