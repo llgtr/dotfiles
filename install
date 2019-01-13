@@ -106,6 +106,7 @@ link_file "sh/bashrc" ".bashrc"
 link_file "sh/base16-shell" ".config/base16-shell"
 link_file "sh/zshrc" ".zshrc"
 link_file "sh/zshenv" ".zshenv"
+link_file "sh/zprofile" ".zprofile"
 link_file "sh/zsh/" ".zsh"
 link_file "git/gitconfig" ".gitconfig"
 link_file "git/gitignore" ".gitignore"
@@ -120,6 +121,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     echo_c "Running MacOS-specific stuff." 2 -b
 
     link_file "tmux/tmux-mac.conf" ".tmux.conf"
+    link_file "mac/nixpkgs/" ".config/nixpkgs"
 
     ask_user "Run defaults.sh [y/n]?" 1
     if [[ "$REPLY" =~ [yY] ]]; then
