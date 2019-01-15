@@ -6,24 +6,17 @@ tap "homebrew/core"
 tap "caskroom/cask"
 
 # Formulae
+brew "zsh"
 brew "git"
 brew "htop"
-brew "valgrind"
 brew "tmux"
-brew "vim"
-brew "python"
-brew "python3"
-brew "leiningen"
-brew "stack"
-brew "zsh"
 brew "tree"
-brew "yarn"
-brew "pandoc"
-brew "emacs", args: ["with-cocoa"]
 brew "the_silver_searcher"
+brew "vim"
+brew "emacs", args: ["with-cocoa"]
+brew "hugo"
 
 # Casks
-cask "java"
 cask "iterm2"
 cask "firefox"
 cask "mactex"
@@ -32,4 +25,3 @@ cask "spotify"
 cask "dash"
 cask "visual-studio-code"
 cask "franz"
-cask "postman"
