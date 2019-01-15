@@ -2,6 +2,7 @@
   allowUnfree = true;
 
   packageOverrides = pkgs: with pkgs; rec {
+    # For reference mainly
     #Dash = stdenv.mkDerivation {
     #  name = "Dash";
     #  src = fetchurl {
@@ -19,18 +20,10 @@
     myPackages = pkgs.buildEnv {
       name = "my-packages";
       paths = [
-        zsh
-        htop
-        tmux
-        tree
-        silver-searcher
         python3
         leiningen
         nodejs-11_x
         yarn
-        #pandoc
-        vim
-        emacs
       ];
       pathsToLink = [ "/share" "/bin" "/Applications" ];
     };
