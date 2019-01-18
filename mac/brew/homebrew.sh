@@ -9,6 +9,8 @@ if ! [[ -x "$(command -v brew)" ]]; then
             https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+brew analytics off
+
 brew doctor
 
 brew bundle --file="$SCRIPT_DIR/Brewfile"
