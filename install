@@ -135,7 +135,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 
     ask_user "Run prefs.sh [y/n]?" 1
     if [[ "$REPLY" =~ [yY] ]]; then
-        sh "$SCRIPT_DIR/mac/prefs.sh import" || true
+        sh "$SCRIPT_DIR/mac/prefs.sh" "import" || true
     fi
 elif [[ "$(uname -s)" == "Linux" ]]; then
     echo_c "Running Linux-specific stuff." 2 -b
