@@ -13,7 +13,6 @@ brew "tmux"
 brew "tree"
 brew "the_silver_searcher"
 brew "vim"
-brew "emacs", args: ["with-cocoa"]
 brew "hugo"
 
 # Casks
@@ -25,3 +24,4 @@ cask "spotify"
 cask "dash"
 cask "visual-studio-code"
 cask "franz"
+cask "emacs"
