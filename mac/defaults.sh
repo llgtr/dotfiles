@@ -55,6 +55,9 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
+# Disable scaling
+defaults write NSGlobalDomain com.apple.mouse.scaling -1
+
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
