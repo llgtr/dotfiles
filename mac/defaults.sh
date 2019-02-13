@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+SCREENS_DIR="$HOME/Pictures/Screens"
+
+if [[ ! -e "$SCREENS_DIR" ]]; then
+    mkdir -p "$SCREENS_DIR"
+fi
+
 # Make sure that settings aren't overridden
 osascript -e 'tell application "System Preferences" to quit'
 
