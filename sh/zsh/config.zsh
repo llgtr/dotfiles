@@ -6,9 +6,16 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 bindkey -v
 
 # Init better autocomplete
-autoload -U compinit
-compinit
-zstyle ':completion:*' insert-tab pending
+autoload -Uz compinit
+zstyle ':completion:*' insert-tab false
+# This nifty little hack is taken from prezto
+_zcomp_modified=(${ZDOTDIR:-$HOME}/.zcompdump(Nmh-20)) # Match if modified within 20 hours
+if [[ $#_zcomp_modified -gt 0 ]]; then
+    compinit -i -C
+else
+    compinit -i
+fi
+unset _zcomp_modified
 
 REPORTTIME=10 # Will show a readout when system+user time passes the value
 REPORTTIME_TOTAL=10 # Will show a readout when total time passes the value
