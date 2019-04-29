@@ -50,6 +50,8 @@
     di = "!d() { git diff --patch-with-stat HEAD~$1; }; \
            git diff-index --quiet HEAD -- || clear; d"
 
+    f = fetch
+
     m = merge
     md = merge --no-commit --no-ff
 
@@ -68,6 +70,8 @@
     bdf = branch --delete --force
 
     cp = cherry-pick
+
+    r = rebase
     ri = rebase --interactive
 
     un = reset HEAD --
