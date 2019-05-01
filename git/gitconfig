@@ -29,13 +29,9 @@
     a = add
     ap = add --patch
 
-    pu = push
-    puf = push --force-with-lease
-    # Push current branch to origin and track upstream
-    pub = "!git push -u origin $(git symbolic-ref --short HEAD)"
-
-    pl = pull
-    plr = pull --rebase
+    b = branch
+    bd = branch --delete
+    bdf = branch --delete --force
 
     c = commit
     ca = commit --amend
@@ -43,6 +39,8 @@
 
     co = checkout
     cob = checkout -b
+
+    cp = cherry-pick
 
     d = diff
     dc = diff --cached
@@ -52,31 +50,32 @@
 
     f = fetch
 
+    g = grep
+    gci = grep --count --ignore-case
+
+    l = log --pretty=oneline --graph --abbrev-commit
+    lp = log --patch
+
     m = merge
     md = merge --no-commit --no-ff
 
-    s = status
+    pl = pull
+    plr = pull --rebase
 
-    st = stash
-    stp = stash pop
-    stl = stash list
-
-    l = log --pretty=oneline --graph --abbrev-commit
-    sh = shortlog --summary --numbered
-    fl = log --patch
-
-    b = branch
-    bd = branch --delete
-    bdf = branch --delete --force
-
-    cp = cherry-pick
+    pu = push
+    # Push current branch to origin and track upstream
+    pub = "!git push -u origin $(git symbolic-ref --short HEAD)"
+    puf = push --force-with-lease
 
     r = rebase
     ri = rebase --interactive
 
-    un = reset HEAD --
+    s = status
 
-    g = grep
-    gci = grep --count --ignore-case
+    sh = shortlog --summary --numbered
+
+    st = stash
+    stl = stash list
+    stp = stash pop
 
 # vim: set filetype=gitconfig :
