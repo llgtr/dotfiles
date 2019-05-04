@@ -12,6 +12,7 @@ brew "htop"
 brew "tmux"
 brew "tree"
 brew "the_silver_searcher"
+brew "ripgrep"
 brew "vim"
 brew "hugo"
 
