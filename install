@@ -122,6 +122,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 
     link_file "tmux/tmux-mac.conf" ".tmux.conf"
     link_file "mac/nixpkgs/" ".config/nixpkgs"
+    link_file "mac/scripts/music.scpt" ".local/bin/music_tmux"
 
     ask_user "Run defaults.sh [y/n]?" 1
     if [[ "$REPLY" =~ [yY] ]]; then
