@@ -7,3 +7,17 @@ linux/polybar/config
 *.o
 xmonad*linux
 .netrwhist
+
+# Emacs
+
+emacs/elpa
+emacs/auto-save-list
+emacs/games
+emacs/backup
+emacs/eshell
+emacs/recentf
+*#
+*~
+*.elc
+*.eld
+*projectile.cache
