@@ -16,6 +16,7 @@ emacs/games
 emacs/backup
 emacs/eshell
 emacs/recentf
+emacs/.lsp*
 *#
 *~
 *.elc
