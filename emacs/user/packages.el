@@ -113,11 +113,15 @@
 
 (use-package lsp-mode
   :commands lsp
+  :hook company-mode
   :config
   (setq lsp-enable-snippet nil))
 
 (use-package company
-  :commands company-mode)
+  :commands company-mode
+  :config
+  (setq company-dabbrev-downcase 0)
+  (setq company-idle-delay 0))
 
 (use-package company-lsp
   :after company
