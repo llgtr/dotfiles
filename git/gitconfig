@@ -5,6 +5,11 @@
     editor = vim
     excludesfile = ~/.gitignore
 
+[color "status"]
+    added = green
+    changed = red
+    untracked = yellow
+
 [color "branch"]
     current = green bold
     local = green
