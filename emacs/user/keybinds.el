@@ -43,9 +43,8 @@
 
    ;; Errors
    "e" '(:ignore t :wk "Errors")
-   "en" 'next-error
-   "ep" 'previous-error
-   "el" 'flycheck-list-errors
+   "en" 'flymake-goto-next-error
+   "ep" 'flymake-goto-prev-error
 
    ;; Files
    "f" '(:ignore t :wk "Files")
