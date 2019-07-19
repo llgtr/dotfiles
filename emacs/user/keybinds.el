@@ -75,6 +75,16 @@
    "jb" 'dumb-jump-back
    "jq" 'dumb-jump-quick-look
 
+   ;; LSP
+   "l" '(:ignore t :wk "LSP")
+   "ld" 'lsp-describe-session
+   "le" 'lsp-execute-code-action
+   "lfd" 'lsp-find-defition
+   "lfr" 'lsp-find-references
+   "lF" 'lsp-format-buffer
+   "lr" 'lsp-rename
+   "ls" 'lsp
+
    ;; Projectile / project
    "p" '(:ignore t :wk "Project")
    "p!" 'projectile-run-shell-command-in-root
