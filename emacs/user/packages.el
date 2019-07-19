@@ -115,7 +115,8 @@
   :commands lsp
   :hook company-mode
   :config
-  (setq lsp-enable-snippet nil))
+  (setq lsp-enable-snippet nil
+        lsp-auto-guess-root t))
 
 (use-package company
   :commands company-mode
