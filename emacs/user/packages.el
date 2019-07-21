@@ -121,8 +121,9 @@
 (use-package company
   :commands company-mode
   :config
-  (setq company-dabbrev-downcase 0)
-  (setq company-idle-delay 0))
+  (setq company-dabbrev-downcase 0
+        company-idle-delay 0
+        company-tooltip-align-annotations t))
 
 (use-package company-lsp
   :after company
