@@ -29,6 +29,9 @@ HISTFILE=~/.zhistory
 HISTSIZE=2000
 SAVEHIST=2000
 
+bindkey "^P" history-beginning-search-backward
+bindkey "^N" history-beginning-search-forward
+
 setopt APPEND_HISTORY # Append rather than replace hist file
 setopt INC_APPEND_HISTORY # Incrementally append commands when entered
 setopt HIST_IGNORE_ALL_DUPS # Only keep most recent duplicate of command
