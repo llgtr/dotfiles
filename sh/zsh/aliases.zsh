@@ -9,6 +9,7 @@ fi
 alias cl='clear'
 
 alias g='git'
+alias gs='g s' # derp
 
 alias ..='cd ..'
 alias ...='cd ../..'
