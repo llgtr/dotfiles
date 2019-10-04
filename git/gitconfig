@@ -34,6 +34,8 @@
     a = add
     ap = add --patch
 
+    alias = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+
     b = branch
     bd = branch --delete
     bdf = branch --delete --force
