@@ -15,6 +15,7 @@ brew "the_silver_searcher"
 brew "ripgrep"
 brew "vim"
 brew "hugo"
+brew "jq"
 
 # Casks
 cask "iterm2"
