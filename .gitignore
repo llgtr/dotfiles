@@ -17,6 +17,7 @@ emacs/backup
 emacs/eshell
 emacs/recentf
 emacs/.lsp*
+emacs/straight
 *#
 *~
 *.elc
