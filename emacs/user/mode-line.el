@@ -71,12 +71,18 @@
      " "
      (if (memq state '(edited added)) "✘" "✔"))))
 
-(defun flymake--transform-mode-line-format (ret)
-  "Change the output of `flymake--mode-line-format'."
-  (cdr ret))
-
-(advice-add #'flymake--mode-line-format
-            :filter-return #'flymake--transform-mode-line-format)
+(defun flycheck-error-info ()
+  "Show Flycheck's state"
+    (pcase flycheck-last-status-change
+      ('finished (if flycheck-current-errors
+                     (let-alist (flycheck-count-errors flycheck-current-errors)
+                       (let ((sum (+ (or .error 0) (or .warning 0))))
+                         (number-to-string sum)))
+                   "✔"))
+      ('running "~")
+      ('no-checker "∅")
+      ('errored "✘")
+      ('interrupted "!")))
 
 (setq-default
  mode-line-format
@@ -94,7 +100,7 @@
                        mode-name
                        " | "
                        (format-mode-line "%l:%c")
-                       (when (bound-and-true-p flymake-mode)
-                         (concat " | " (format-mode-line flymake--mode-line-format)))))))
+                       (when (boundp 'flycheck-last-status-change)
+                         (concat " | " (flycheck-error-info)))))))
 
 (provide 'mode-line)

@@ -118,6 +118,14 @@
   (setq lsp-enable-snippet nil
         lsp-auto-guess-root t))
 
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :config
+  (setq lsp-ui-flycheck-enable t))
+
+(use-package flycheck
+  :hook (lsp-mode . flycheck-mode))
+
 (use-package company
   :commands company-mode
   :config
