@@ -70,7 +70,10 @@ function link_file {
     fi
 
     echo "$(echo_c "Linking" 6) $src $(echo_c "->" 6) $dst"
-    ln -sfn "$src" "$dst"
+    if [[ -L "$dst" ]]; then
+        unlink "$dst" # Replaces POSIX incompatible ln -sfn
+    fi
+    ln -s "$src" "$dst"
 }
 
 # Taken from https://github.com/holman/dotfiles/blob/master/script/bootstrap
