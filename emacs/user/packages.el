@@ -1,38 +1,21 @@
 ;;; -*- lexical-binding: t -*-
 
-;(defvar bootstrap-version)
-;(let ((bootstrap-file
-;       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-;      (bootstrap-version 5))
-;  (unless (file-exists-p bootstrap-file)
-;    (with-current-buffer
-;        (url-retrieve-synchronously
-;         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-;         'silent 'inhibit-cookies)
-;      (goto-char (point-max))
-;      (eval-print-last-sexp)))
-;  (load bootstrap-file nil 'nomessage))
-;(setq straight-check-for-modifications nil)
-;
-;(straight-use-package 'use-package)
-;(setq straight-use-package-by-default t)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(require 'package)
-(setq package-enable-at-startup nil
-      package-archives
-      `(("melpa"        . "https://melpa.org/packages/")
-        ("gnu"          . "https://elpa.gnu.org/packages/"))
-      package-archive-priorities
-      '(("melpa" . -1)
-        ("gnu" . -2)))
-(package-initialize)
-
-(unless (package-installed-p 'use-package)
-  (progn
-    (package-refresh-contents)
-    (package-install 'use-package)))
-(require 'use-package)
-(setq use-package-always-ensure t
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t
+      straight-check-for-modifications nil
       use-package-always-defer t)
 
 ;; Packages
