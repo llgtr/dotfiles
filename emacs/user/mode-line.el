@@ -73,16 +73,21 @@
 
 (defun flycheck-error-info ()
   "Show Flycheck's state"
-    (pcase flycheck-last-status-change
-      ('finished (if flycheck-current-errors
-                     (let-alist (flycheck-count-errors flycheck-current-errors)
-                       (let ((sum (+ (or .error 0) (or .warning 0))))
-                         (number-to-string sum)))
-                   "✔"))
-      ('running "~")
-      ('no-checker "∅")
-      ('errored "✘")
-      ('interrupted "!")))
+  (pcase flycheck-last-status-change
+    ('finished (if flycheck-current-errors
+                   (let-alist (flycheck-count-errors flycheck-current-errors)
+                     (let ((errors (or .error 0))
+                           (warnings (or .warning 0))
+                           (infos (or .info 0)))
+                       (format "%s, %s, %s"
+                               infos
+                               warnings
+                               errors)))
+                 "✔"))
+    ('running "~")
+    ('no-checker "∅")
+    ('errored "✘")
+    ('interrupted "!")))
 
 (setq-default
  mode-line-format
