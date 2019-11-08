@@ -42,8 +42,8 @@
     br = for-each-ref --sort=committerdate refs/heads/ refs/remotes \
     --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 
-    c = commit
-    ca = commit --amend
+    c = commit -v
+    ca = commit --amend -v
     can = commit --amend --no-edit
 
     co = checkout
