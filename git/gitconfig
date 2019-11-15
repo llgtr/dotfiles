@@ -48,6 +48,7 @@
 
     co = checkout
     cob = checkout -b
+    cop = checkout --patch
 
     cp = cherry-pick
 
