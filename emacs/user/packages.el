@@ -99,7 +99,8 @@
   :hook company-mode
   :config
   (setq lsp-enable-snippet nil
-        lsp-auto-guess-root t))
+        lsp-auto-guess-root t
+        lsp-rust-server 'rust-analyzer))
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
