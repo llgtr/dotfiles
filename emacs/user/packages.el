@@ -100,12 +100,18 @@
   :config
   (setq lsp-enable-snippet nil
         lsp-auto-guess-root t
+        lsp-keep-workspace-alive nil
         lsp-rust-server 'rust-analyzer))
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :config
-  (setq lsp-ui-flycheck-enable t))
+  (setq lsp-ui-flycheck-enable t
+        lsp-ui-sideline-show-hover nil
+        lsp-ui-sideline-show-symbol nil
+        lsp-ui-sideline-ignore-duplicate t
+        lsp-ui-doc-enable nil
+        lsp-ui-doc-position 'at-point))
 
 (use-package flycheck
   :hook (lsp-mode . flycheck-mode))
@@ -120,7 +126,8 @@
 (use-package company-lsp
   :after company
   :config
-  (push 'company-lsp company-backends))
+  (push 'company-lsp company-backends)
+  (setq company-lsp-cache-candidates 'auto))
 
 (use-package esup
   :commands esup)
