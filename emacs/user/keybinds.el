@@ -83,6 +83,7 @@
    "lfd" 'lsp-find-defition
    "lfr" 'lsp-find-references
    "lF" 'lsp-format-buffer
+   "lg" 'lsp-ui-doc-glance
    "lr" 'lsp-rename
    "ls" 'lsp
 
