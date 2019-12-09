@@ -67,7 +67,9 @@
 
 (use-package exec-path-from-shell
   :if (eq system-type 'darwin)
-  :defer 1
-  :config (exec-path-from-shell-initialize))
+  :demand t
+  :config
+  (setq exec-path-from-shell-arguments nil)
+  (exec-path-from-shell-initialize))
 
 (provide 'misc-configs)
