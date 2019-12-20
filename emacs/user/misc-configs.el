@@ -69,7 +69,6 @@
   :if (eq system-type 'darwin)
   :demand t
   :config
-  (setq exec-path-from-shell-arguments nil)
   (exec-path-from-shell-initialize))
 
 (provide 'misc-configs)
