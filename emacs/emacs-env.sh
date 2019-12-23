@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+ENVFILE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/envfile"
 
-rm "$SCRIPT_DIR/envfile"
+if [[ -e "$ENVFILE" ]]; then
+    printf "The envfile already exists. Do you want to override [y/n]? "
+    read -r -n 1
+    if [[ ! "$REPLY" =~ [yY] ]]; then
+        exit
+    fi
+    rm "$ENVFILE"
+fi
 
 env >> envfile
 

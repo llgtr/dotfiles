@@ -60,38 +60,31 @@
 
 ;; Helper function that reads envfile created by emacs-env.sh. Mostly copied
 ;; from doom-emacs.
+;; TODO: Clean this up
 (defun read-env-file ()
   (let ((env-file (expand-file-name "envfile" user-emacs-directory)))
     (if (file-exists-p env-file)
-        (let (envvars environment)
-          (with-temp-buffer
-            (insert-file-contents env-file)
-            (while (re-search-forward "\n *\\([^#= \n]*\\)=" nil t)
-              (push (match-string 1) envvars)
-              (push (buffer-substring
-                     (match-beginning 1)
-                     (1- (or (save-excursion
-                               (when (re-search-forward "^\\([^= ]+\\)=" nil t)
-                                 (line-beginning-position)))
-                             (point-max))))
-                    environment)
-              (when environment
-                (setq process-environment
-                      (append (nreverse environment) process-environment)
-                      exec-path
-                      (if (member "PATH" envvars)
-                          (append (parse-colon-path (getenv "PATH"))
-                                  (list exec-directory))
-                        exec-path)
-                      shell-file-name
-                      (if (member "SHELL" envvars)
-                          (setq shell-file-name
-                                (or (getenv "SHELL") shell-file-name))
-                        shell-file-name))
-                envvars)
-              )))
-      (error (format "%s does not exist. Run emacs-env.sh" env-file))))
-  )
+        (with-temp-buffer
+          (insert-file-contents env-file)
+          (while (re-search-forward "\n *\\([^#= \n]*\\)=" nil t)
+            (let ((envvars (match-string 1))
+                  (environment (buffer-substring
+                                (match-beginning 1)
+                                (- (or (save-excursion
+                                         (when (re-search-forward "^\\([^= ]+\\)=" nil t)
+                                           (line-beginning-position)))
+                                       (point-max)) 1))))
+              (let* ((variable-and-value (split-string environment "="))
+                     (env-var (car variable-and-value))
+                     (env-val (car (cdr variable-and-value))))
+                (setenv env-var env-val)
+                (if (string-equal "PATH" envvars)
+                    (setq exec-path (append (parse-colon-path (getenv "PATH"))
+                                            (list exec-directory))))
+                (if (string-equal "SHELL" envvars)
+                    (setq shell-file-name
+                          (or (getenv "SHELL") shell-file-name)))))))
+      (error (format "%s does not exist. Run emacs-env.sh" env-file)))))
 
 ;; MacOS things
 (when (eq system-type 'darwin)
