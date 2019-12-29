@@ -21,3 +21,4 @@
 (require 'mode-line)
 (require 'lang)
 (require 'misc-configs)
+(require 'user-env)
