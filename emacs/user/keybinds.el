@@ -104,7 +104,7 @@
    "ry" 'counsel-yank-pop
 
    ;; Search
-   "s" '(:ignore t :wk "Registers")
+   "s" '(:ignore t :wk "Search")
    "sa" 'counsel-ag
    "sr" 'counsel-rg
    "sg" 'counsel-git-grep
