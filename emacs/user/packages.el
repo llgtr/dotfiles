@@ -96,6 +96,7 @@
 
 (use-package lsp-mode
   :commands lsp
+  :hook ((python-mode rust-mode) . lsp)
   :config
   (setq lsp-enable-snippet nil
         lsp-auto-guess-root t
