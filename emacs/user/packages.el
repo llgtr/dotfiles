@@ -96,7 +96,6 @@
 
 (use-package lsp-mode
   :commands lsp
-  :hook company-mode
   :config
   (setq lsp-enable-snippet nil
         lsp-auto-guess-root t
@@ -118,6 +117,7 @@
 
 (use-package company
   :commands company-mode
+  :hook (lsp-mode . company-mode)
   :config
   (setq company-dabbrev-downcase 0
         company-idle-delay 0
