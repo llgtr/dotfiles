@@ -76,13 +76,13 @@
   (pcase flycheck-last-status-change
     ('finished (if flycheck-current-errors
                    (let-alist (flycheck-count-errors flycheck-current-errors)
-                     (let ((errors (or .error 0))
+                     (let ((infos (or .info 0))
                            (warnings (or .warning 0))
-                           (infos (or .info 0)))
+                           (errors (or .error 0)))
                        (format "%s, %s, %s"
-                               infos
-                               warnings
-                               errors)))
+                               (propertize (number-to-string infos) 'font-lock-face 'success)
+                               (propertize (number-to-string warnings) 'font-lock-face 'warning)
+                               (propertize (number-to-string errors) 'font-lock-face 'error))))
                  "✔"))
     ('running "~")
     ('no-checker "∅")
