@@ -80,7 +80,7 @@
    "l" '(:ignore t :wk "LSP")
    "ld" 'lsp-describe-session
    "le" 'lsp-execute-code-action
-   "lfd" 'lsp-find-defition
+   "lfd" 'lsp-find-definition
    "lfr" 'lsp-find-references
    "lF" 'lsp-format-buffer
    "lg" 'lsp-ui-doc-glance
