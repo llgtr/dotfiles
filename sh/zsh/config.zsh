@@ -26,8 +26,8 @@ KEYTIMEOUT=1
 # => History
 HISTFILE=~/.zhistory
 
-HISTSIZE=2000
-SAVEHIST=2000
+HISTSIZE=8000
+SAVEHIST=8000
 
 bindkey "^P" history-beginning-search-backward
 bindkey "^N" history-beginning-search-forward
