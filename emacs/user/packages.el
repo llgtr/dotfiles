@@ -135,4 +135,16 @@
 (use-package esup
   :commands esup)
 
+(use-package hl-todo
+  :demand t
+  :config (global-hl-todo-mode))
+
+(use-package magit
+  :commands magit-status magit-blame)
+
+(use-package evil-magit
+  :hook (magit-mode . evil-magit-init)
+  :init
+  (setq evil-magit-state 'normal))
+
 (provide 'packages)
