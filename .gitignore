@@ -18,6 +18,7 @@ emacs/eshell
 emacs/recentf
 emacs/.lsp*
 emacs/straight
+emacs/transient
 *#
 *~
 *.elc
