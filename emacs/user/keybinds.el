@@ -51,6 +51,11 @@
    "f" '(:ignore t :wk "Files")
    "fr" 'recentf-open-files
 
+   ;; Git
+   "g" '(:ignore t :wk "Git")
+   "gb" 'magit-blame
+   "gs" 'magit-status
+
    ;; Help
    "h" '(:ignore t :wk "Help")
    "hw" 'which-key-show-top-level
