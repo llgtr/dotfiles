@@ -3,9 +3,10 @@
 ;; Set defaults
 (setq-default
  ;; Scroll like vim
- scroll-margin 10
- scroll-conservatively 10000
+ scroll-margin 0
+ scroll-conservatively 101
  scroll-step 1
+ auto-window-vscroll nil
  ;; Indent with spaces rather than tabs by default
  indent-tabs-mode nil
  ;; Follow symlinked files without confirmation
