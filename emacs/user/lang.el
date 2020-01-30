@@ -2,6 +2,43 @@
 
 ;; General
 
+;; LSP and friends
+(use-package lsp-mode
+  :commands lsp
+  :hook ((python-mode rust-mode) . lsp)
+  :config
+  (setq lsp-enable-snippet nil
+        lsp-auto-guess-root t
+        lsp-keep-workspace-alive nil
+        lsp-rust-server 'rust-analyzer))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :config
+  (setq lsp-ui-flycheck-enable t
+        lsp-ui-sideline-show-hover nil
+        lsp-ui-sideline-show-symbol nil
+        lsp-ui-sideline-ignore-duplicate t
+        lsp-ui-doc-enable nil
+        lsp-ui-doc-position 'at-point))
+
+(use-package flycheck
+  :hook (lsp-mode . flycheck-mode))
+
+(use-package company
+  :commands company-mode
+  :hook (lsp-mode . company-mode)
+  :config
+  (setq company-dabbrev-downcase 0
+        company-idle-delay 0
+        company-tooltip-align-annotations t))
+
+(use-package company-lsp
+  :after company
+  :config
+  (push 'company-lsp company-backends)
+  (setq company-lsp-cache-candidates 'auto))
+
 ;; Rust
 (use-package rust-mode
   :mode ("\\.rs\\'"   . rust-mode)
