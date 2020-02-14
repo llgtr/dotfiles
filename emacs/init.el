@@ -15,6 +15,9 @@
 ;; Path to user directory
 (add-to-list 'load-path (expand-file-name "user" user-emacs-directory))
 
+;; Inhibit frame resizing when font size is different from system default
+(setq frame-inhibit-implied-resize t)
+
 ;; Load configurations
 (require 'packages)
 (require 'keybinds)

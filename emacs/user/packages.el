@@ -74,6 +74,7 @@
 
 (use-package projectile
   :demand t
+  :init (recentf-mode)
   :config
   (setq projectile-completion-system 'ivy)
   (projectile-mode))

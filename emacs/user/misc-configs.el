@@ -18,9 +18,6 @@
  ;; Truncate instead of wrapping
  truncate-lines t)
 
-;; Recent files
-(recentf-mode)
-
 ;; Better backup configurations
 ;; (Be careful with this if editing sensitive files via emacs)
 (let ((backup-directory (expand-file-name "backup/" user-emacs-directory))
@@ -41,7 +38,8 @@
 (set-fringe-mode 0)
 (show-paren-mode 1)
 (setq-default display-line-numbers t)
-(setq inhibit-startup-message t)
+(setq inhibit-startup-message t
+      initial-major-mode 'fundamental-mode)
 (setq initial-scratch-message
       (format ";;
 ;;                        Welcome to emacs %s
