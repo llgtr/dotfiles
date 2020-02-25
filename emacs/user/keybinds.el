@@ -127,8 +127,8 @@
    "w\"" 'split-window-below
    "w%" 'split-window-right
    "w=" 'balance-windows
-   "wd" 'delete-window
-   "wD" 'delete-other-windows
+   "wd" 'ace-delete-window
+   "wD" 'ace-delete-other-windows
    "ws" 'ace-swap-window
 
    ;; Quit
