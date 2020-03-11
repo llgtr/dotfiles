@@ -64,7 +64,13 @@
 (use-package ace-window
   :commands (ace-window ace-swap-window)
   :config
-  (setq aw-scope 'frame))
+  (setq aw-scope 'frame
+        aw-dispatch-alist
+        '((?d aw-delete-window "Delete Window")
+          (?s aw-swap-window "Swap Windows")
+          (?m aw-move-window "Move Window")
+          (?D delete-other-windows "Delete Other Windows")
+          (?h aw-show-dispatch-help))))
 
 (use-package which-key
   :demand t
