@@ -31,7 +31,10 @@
   :config
   (setq company-dabbrev-downcase 0
         company-idle-delay 0
-        company-tooltip-align-annotations t))
+        company-tooltip-align-annotations t)
+  :bind
+  (:map company-active-map
+        ("<tab>" . company-complete-selection)))
 
 (use-package company-lsp
   :after company
