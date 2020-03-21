@@ -5,7 +5,7 @@
 ;; LSP and friends
 (use-package lsp-mode
   :commands lsp
-  :hook ((python-mode rust-mode) . lsp)
+  :hook ((python-mode rust-mode dart-mode) . lsp)
   :config
   (setq lsp-enable-snippet nil
         lsp-auto-guess-root t
@@ -87,5 +87,9 @@
 (use-package markdown-mode
   :mode
   ("\\.md?\\'" . markdown-mode))
+
+(use-package dart-mode
+  :mode
+  ("\\.dart?\\'" . dart-mode))
 
 (provide 'lang)
