@@ -5,7 +5,7 @@
 ;; LSP and friends
 (use-package lsp-mode
   :commands lsp
-  :hook ((python-mode rust-mode dart-mode) . lsp)
+  :hook ((python-mode rust-mode dart-mode web-mode) . lsp)
   :config
   (setq lsp-enable-snippet nil
         lsp-auto-guess-root t
