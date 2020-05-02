@@ -36,12 +36,6 @@
   (:map company-active-map
         ("<tab>" . company-complete-selection)))
 
-(use-package company-lsp
-  :after company
-  :config
-  (push 'company-lsp company-backends)
-  (setq company-lsp-cache-candidates 'auto))
-
 ;; Rust
 (use-package rust-mode
   :mode ("\\.rs\\'"   . rust-mode)
