@@ -6,6 +6,8 @@
 (use-package lsp-mode
   :commands lsp
   :hook ((python-mode rust-mode dart-mode web-mode) . lsp)
+  :init
+  (setq read-process-output-max (* 1024 1024))
   :config
   (setq lsp-enable-snippet nil
         lsp-auto-guess-root t
