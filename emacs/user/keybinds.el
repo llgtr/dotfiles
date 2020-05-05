@@ -16,6 +16,7 @@
    ;; General binds
    "SPC" '(execute-extended-command :wk "counsel-M-x")
    "TAB" 'ace-window
+   "DEL" 'evil-switch-to-windows-last-buffer
    "!" 'shell-command
    "&" 'async-shell-command
    "?" 'emacs-init-time
