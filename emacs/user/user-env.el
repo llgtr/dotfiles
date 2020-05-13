@@ -32,4 +32,6 @@
             (error (format "%s is malformed. Run `emacs-env.sh` and overwrite the envfile." env-file))))))
   (error (format "%s does not exist. Run `emacs-env.sh`." env-file)))
 
+(setq default-directory "~")
+
 (provide 'user-env)
