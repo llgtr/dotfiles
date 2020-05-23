@@ -24,6 +24,9 @@
         lsp-ui-doc-enable nil
         lsp-ui-doc-position 'at-point))
 
+(use-package lsp-dart
+  :after (dart-mode lsp-mode))
+
 (use-package flycheck
   :hook (lsp-mode . flycheck-mode))
 
