@@ -8,7 +8,7 @@
   :demand t
   :config
   (general-define-key
-   :states '(normal visual insert emacs)
+   :states '(normal visual insert emacs motion)
    :prefix main-leader-key
    :non-normal-prefix alt-leader-key ; When in insert or emacs mode
    :keymaps 'override
