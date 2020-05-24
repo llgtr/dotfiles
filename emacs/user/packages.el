@@ -27,6 +27,15 @@
   (evil-mode)
   (setq undo-tree-enable-undo-in-region nil))
 
+(use-package evil-magit
+  :hook (magit-mode . evil-magit-init)
+  :init
+  (setq evil-magit-state 'normal))
+
+(use-package evil-surround
+  :after evil
+  :config (global-evil-surround-mode 1))
+
 (use-package base16-theme
   :demand t
   :init
@@ -112,10 +121,5 @@
 
 (use-package magit
   :commands magit-status magit-blame)
-
-(use-package evil-magit
-  :hook (magit-mode . evil-magit-init)
-  :init
-  (setq evil-magit-state 'normal))
 
 (provide 'packages)
