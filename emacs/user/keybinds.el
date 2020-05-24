@@ -84,12 +84,12 @@
 
    ;; LSP
    "l" '(:ignore t :wk "LSP")
-   "ld" 'lsp-describe-session
+   "l?" 'lsp-describe-session
    "le" 'lsp-execute-code-action
-   "lfd" 'lsp-ui-peek-find-definitions
-   "lfr" 'lsp-ui-peek-find-references
+   "lfd" 'lsp-find-definition
+   "lfr" 'lsp-find-references
    "lF" 'lsp-format-buffer
-   "lg" 'lsp-ui-doc-glance
+   "ld" 'lsp-describe-thing-at-point
    "lr" 'lsp-rename
    "ls" 'lsp
 

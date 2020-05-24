@@ -15,16 +15,6 @@
         lsp-eldoc-hook nil
         lsp-rust-server 'rust-analyzer))
 
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :config
-  (setq lsp-ui-flycheck-enable t
-        lsp-ui-sideline-show-hover nil
-        lsp-ui-sideline-show-symbol nil
-        lsp-ui-sideline-ignore-duplicate t
-        lsp-ui-doc-enable nil
-        lsp-ui-doc-position 'at-point))
-
 (use-package lsp-dart
   :after (dart-mode lsp-mode))
 
