@@ -12,6 +12,7 @@
   (setq lsp-enable-snippet nil
         lsp-auto-guess-root t
         lsp-keep-workspace-alive nil
+        lsp-eldoc-hook nil
         lsp-rust-server 'rust-analyzer))
 
 (use-package lsp-ui
