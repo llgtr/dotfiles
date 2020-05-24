@@ -201,6 +201,14 @@
    "ek" 'web-mode-element-kill
    "en" 'web-mode-element-next
    "ep" 'web-mode-element-previous
-   "ec" 'web-mode-element-close))
+   "ec" 'web-mode-element-close)
+
+  (general-define-key
+    :states '(normal)
+    :keymaps 'xref--xref-buffer-mode-map
+
+    "RET" 'xref-quit-and-goto-xref
+    "S-<return>" 'xref-show-location-at-point
+    "q" 'quit-window))
 
 (provide 'keybinds)
