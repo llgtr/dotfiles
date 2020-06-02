@@ -13,6 +13,7 @@
         lsp-auto-guess-root t
         lsp-keep-workspace-alive nil
         lsp-eldoc-hook nil
+        lsp-enable-on-type-formatting nil
         lsp-rust-server 'rust-analyzer))
 
 (use-package lsp-dart
