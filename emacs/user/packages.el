@@ -91,7 +91,8 @@
   :demand t
   :init (recentf-mode)
   :config
-  (setq projectile-completion-system 'ivy)
+  (setq projectile-completion-system 'ivy
+        projectile-project-root-files-functions '(projectile-root-bottom-up))
   (projectile-mode))
 
 (use-package smartparens
