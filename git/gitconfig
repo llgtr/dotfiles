@@ -62,6 +62,7 @@
            git diff-index --quiet HEAD -- || clear; d"
 
     f = fetch
+    find = log --pretty=\"format:%C(auto)%H %s\" --all --grep
 
     g = grep
     gci = grep --count --ignore-case
