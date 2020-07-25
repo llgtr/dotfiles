@@ -20,6 +20,7 @@
         lsp-enable-semantic-highlighting nil
         lsp-enable-links nil
         lsp-prefer-capf t
+        lsp-signature-auto-activate nil
         lsp-rust-server 'rust-analyzer))
 
 (use-package lsp-dart
