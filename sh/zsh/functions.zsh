@@ -23,3 +23,10 @@ function timer {
 
     for i in {1..$1}; do sleep 1; echo -n -e $i\\r; done
 }
+
+function nvm {
+  unset -f nvm
+  export NVM_PREFIX=$(brew --prefix nvm)
+  [ -s "$NVM_PREFIX/nvm.sh" ] && . "$NVM_PREFIX/nvm.sh"
+  nvm "$@"
+}
