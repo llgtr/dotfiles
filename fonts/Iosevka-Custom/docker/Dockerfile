@@ -39,6 +39,7 @@ RUN curl -sLo otfcc.tar.gz https://github.com/caryll/otfcc/archive/v0.8.4.tar.gz
     && rm -rf otfcc/ otfcc.tar.gz
 
 # Iosevka repo
+ARG CACHEBUST=1
 RUN git clone https://github.com/be5invis/Iosevka.git
 WORKDIR /tmp/Iosevka
 
