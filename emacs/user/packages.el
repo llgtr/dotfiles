@@ -25,6 +25,7 @@
   :demand t
   :config
   (evil-mode)
+  (evil-set-undo-system 'undo-redo)
   (setq undo-tree-enable-undo-in-region nil))
 
 (use-package evil-magit
