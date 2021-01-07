@@ -83,6 +83,9 @@
     r = rebase
     ri = rebase --interactive
 
+    re = reset
+    reh = reset --hard
+
     s = status
 
     sh = shortlog --summary --numbered
