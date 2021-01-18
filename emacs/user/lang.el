@@ -83,7 +83,6 @@
   ("\\.ts[x]?\\'" . web-mode)
   ("\\.json?\\'" . web-mode)
   :config
-  (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
