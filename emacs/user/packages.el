@@ -97,9 +97,6 @@
   :demand t
   :config (editorconfig-mode))
 
-(use-package ox-hugo
-  :after ox)
-
 (use-package dumb-jump
   :commands (dumb-jump-go dumb-jump-back dumb-jump-quick-look)
   :config
