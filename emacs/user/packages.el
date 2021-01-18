@@ -96,11 +96,6 @@
         projectile-project-root-files-functions '(projectile-root-bottom-up))
   (projectile-mode))
 
-(use-package smartparens
-  :demand t
-  :config
-  (smartparens-global-mode))
-
 (use-package editorconfig
   :demand t
   :config (editorconfig-mode))
