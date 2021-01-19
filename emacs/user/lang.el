@@ -5,7 +5,7 @@
 ;; LSP and friends
 (use-package lsp-mode
   :commands lsp
-  :hook ((python-mode rust-mode dart-mode web-mode) . lsp)
+  :hook ((python-mode rust-mode dart-mode typescript-mode) . lsp)
   :init
   (setq read-process-output-max (* 1024 1024)
         lsp-headerline-breadcrumb-icons-enable nil
@@ -80,9 +80,6 @@
 (use-package web-mode
   :mode
   ("\\.html?\\'" . web-mode)
-  ("\\.js[x]?\\'" . web-mode)
-  ("\\.ts[x]?\\'" . web-mode)
-  ("\\.json?\\'" . web-mode)
   :config
   (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
@@ -90,6 +87,14 @@
   (setq web-mode-enable-auto-quoting nil)
   (setq web-mode-content-types-alist
     '(("jsx" . "/\\(rn\\|component\\)[s]?/.*\\.js[x]?\\'"))))
+
+(use-package typescript-mode
+  :mode ("\\.ts[x]?\\'" . typescript-mode))
+
+(use-package js-mode
+  :mode ("\\.js[x]?\\'" . js-mode)
+        ("\\.json?\\'" . js-mode)
+  :straight (:type built-in))
 
 ;; Markdown
 (use-package markdown-mode
