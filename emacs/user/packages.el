@@ -33,11 +33,8 @@
   :init
   (setq evil-magit-state 'normal))
 
-
 (use-package base16-theme
   :demand t
-  :init
-  (add-to-list 'custom-theme-load-path (expand-file-name "pkgs/base16-theme/build" user-emacs-directory))
   :config
   (load-theme 'base16-gruvbox-dark-pale t))
 
