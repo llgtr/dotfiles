@@ -102,7 +102,8 @@
                        (mode-line-directory)
                        (format-mode-line 'mode-line-buffer-identification)
                        " | "
-                       mode-name
+                       (cond ((listp mode-name) (car mode-name))
+                             (t mode-name))
                        " | "
                        (format-mode-line "%l:%c")
                        (when (boundp 'flycheck-last-status-change)
