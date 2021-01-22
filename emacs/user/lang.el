@@ -34,12 +34,11 @@
   :commands company-mode
   :hook (lsp-mode . company-mode)
   :config
-  (setq company-idle-delay 0.2
+  (setq company-idle-delay 0.0
         company-minimum-prefix-length 2
-        company-tooltip-limit 10
+        company-tooltip-limit 5
         company-tooltip-align-annotations t
         company-require-match 'never
-        company-backend '(company-capf)
         company-auto-complete-chars nil
         company-dabbrev-other-buffers nil
         company-dabbrev-ignore-case nil
