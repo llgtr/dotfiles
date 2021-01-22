@@ -8,7 +8,7 @@
   :hook ((python-mode rust-mode dart-mode typescript-mode) . lsp)
   :init
   (setq read-process-output-max (* 1024 1024)
-        lsp-headerline-breadcrumb-icons-enable nil
+        lsp-headerline-breadcrumb-enable nil
         lsp-enable-snippet nil
         lsp-auto-guess-root t
         lsp-keep-workspace-alive nil
