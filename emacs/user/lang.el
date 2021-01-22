@@ -9,6 +9,7 @@
   :init
   (setq read-process-output-max (* 1024 1024)
         lsp-headerline-breadcrumb-enable nil
+        lsp-completion-provider :capf
         lsp-enable-snippet nil
         lsp-auto-guess-root t
         lsp-keep-workspace-alive nil
@@ -19,9 +20,8 @@
         lsp-enable-file-watchers nil
         lsp-enable-text-document-color nil
         lsp-enable-semantic-highlighting nil
-        lsp-enable-links nil
-        lsp-prefer-capf t
         lsp-signature-auto-activate nil
+        lsp-log-io nil
         lsp-rust-server 'rust-analyzer))
 
 (use-package lsp-dart
