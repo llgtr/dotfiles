@@ -106,7 +106,8 @@
                              (t mode-name))
                        " | "
                        (format-mode-line "%l:%c")
-                       (when (boundp 'flycheck-last-status-change)
+                       (when (and (boundp 'flycheck-last-status-change)
+                                  (not (eq flycheck-last-status-change 'not-checked)))
                          (concat " | " (flycheck-error-info)))))))
 
 (provide 'mode-line)
