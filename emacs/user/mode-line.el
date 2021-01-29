@@ -85,9 +85,9 @@
                                (propertize (number-to-string errors) 'font-lock-face 'error))))
                  "✔"))
     ('running "~")
-    ('no-checker "∅")
     ('errored "✘")
-    ('interrupted "!")))
+    ('interrupted "!")
+    (_ "∅")))
 
 (setq-default
  mode-line-format
