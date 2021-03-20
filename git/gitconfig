@@ -1,6 +1,9 @@
 [include]
     path = ~/.gitconfig.local
 
+[init]
+    defaultBranch = trunk
+
 [core]
     editor = vim
     excludesfile = ~/.gitignore
