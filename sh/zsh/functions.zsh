@@ -24,3 +24,9 @@ function timer {
     for i in {1..$1}; do sleep 1; echo -n -e $i\\r; done
 }
 
+# Find process using a port
+# $1: port number
+function port_user() {
+  lsof -nP "-iTCP:$1" | grep LISTEN
+}
+
