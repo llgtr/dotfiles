@@ -3,7 +3,7 @@
 # Taps
 tap "homebrew/bundle"
 tap "homebrew/core"
-tap "caskroom/cask"
+tap "d12frosted/emacs-plus"
 
 # Formulae
 brew "zsh"
@@ -16,14 +16,9 @@ brew "ripgrep"
 brew "vim"
 brew "hugo"
 brew "jq"
+# brew "emacs-plus@28", args: ["with-native-comp"]
+# TODO: Wait for possible arm support
 
 # Casks
 cask "iterm2"
 cask "firefox"
-cask "mactex"
-cask "wireshark"
-cask "spotify"
-cask "dash"
-cask "visual-studio-code"
-cask "franz"
-cask "emacs"
