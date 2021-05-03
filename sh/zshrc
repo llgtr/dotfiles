@@ -1,2 +1,6 @@
 # Source all relevant files
 for config ($HOME/.zsh/*.zsh) source $config
+
+if [[ "$(uname -m)" == "arm64" ]]; then
+    export PATH="/opt/homebrew/bin:${PATH}"
+fi
