@@ -19,6 +19,7 @@ emacs/recentf
 emacs/.lsp*
 emacs/straight
 emacs/transient
+emacs/eln-cache
 *#
 *~
 *.elc
