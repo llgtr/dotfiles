@@ -27,6 +27,10 @@ function timer {
 # Find process using a port
 # $1: port number
 function port_user() {
-  lsof -nP "-iTCP:$1" | grep LISTEN
+    if [[ $# -eq 1 ]]; then
+       lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+       lsof -iTCP -sTCP:LISTEN -n -P
+    fi
 }
 
