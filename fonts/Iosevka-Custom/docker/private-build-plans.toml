@@ -1,62 +1,20 @@
 [buildPlans.iosevka-custom]
-family = "Iosevka Term"
+family = "Iosevka Custom"
+spacing = "term"
+serifs = "sans"
+no-cv-ss = true
+no-ligation = true
 
-design = ["cv01",
-          "VXBK",
-          "VXBN",
-          "cv52",
-          "cv24",
-          "VXCB",
-          "cv04",
-          "cv58",
-          "cv69",
-          "cv08",
-          "cv26",
-          "VXCF",
-          "VXCP",
-          "VXAZ",
-          "cv85",
-          "VXDC",
-          "cv89",
-          "cv72",
-          "cv76",
-          "cv78",
-          "cv49",
-          "VXBD",
-          "cv74",
-          "VXAQ",
-          "VXBH",
-          "cv91",
-          "VXBZ",
-          "VXCI",
-          "cv42",
-          "cv83",
-          "cv81",
-          "VXAB",
-          "cv51",
-          "cv47",
-          "VXAT",
-          "VXAF",
-          "VXAX",
-          "cv97",
-          "cv95",
-          "cv17",
-          "cv19",
-          "cv20",
-          "cv29",
-          "VXAN",
-          "cv37",
-          "cv44",
-          "VXAK",
-          "cv33",
-          "cv38",
-          "cv63",
-          "VXCY",
-          "cv67",
-          "VXDG",
-          "VXDI"]
+  [buildPlans.iosevka-custom.variants]
+  inherits = "ss08"
 
-[buildPlans.iosevka-custom.widths.normal]
-shape = 500        # Unit Width, measured in 1/1000 em.
-menu  = 5          # Width grade for the font's names.
-css   = "normal"   # "font-stretch' property of webfont CSS.
+    [buildPlans.iosevka-custom.variants.design]
+    g = "double-storey-open"
+    m = "short-leg"
+    underscore = "high"
+    paren = "normal"
+    brace = "curly-flat-boundary"
+    number-sign = "upright"
+    ampersand = "et-toothless-rounded"
+    at = "short"
+    percent = "rings-segmented-slash"
