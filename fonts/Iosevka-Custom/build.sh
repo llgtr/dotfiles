@@ -2,6 +2,11 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
+if ! docker info > /dev/null 2>&1; then
+    echo "Please ensure that Docker is running"
+    exit 1
+fi
+
 rm -rf $SCRIPT_DIR/out/
 docker build -t iosevka-docker --build-arg CACHEBUST=$(date +%Y%m%d) $SCRIPT_DIR/docker/.
 docker run --name iosevka-builder iosevka-docker
