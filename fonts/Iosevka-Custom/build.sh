@@ -7,9 +7,9 @@ if ! docker info > /dev/null 2>&1; then
     exit 1
 fi
 
-rm -rf $SCRIPT_DIR/out/
 docker build -t iosevka-docker --build-arg CACHEBUST=$(date +%Y%m%d) $SCRIPT_DIR/docker/.
 docker run --name iosevka-builder iosevka-docker
+rm -rf $SCRIPT_DIR/out/
 docker cp iosevka-builder:/tmp/Iosevka/dist/iosevka-custom/ $SCRIPT_DIR/out/
 docker stop iosevka-builder
 docker rm iosevka-builder
