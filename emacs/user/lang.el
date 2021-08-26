@@ -104,4 +104,8 @@
   :mode
   ("\\.dart?\\'" . dart-mode))
 
+(use-package qml-mode
+  :mode
+  ("\\.qml?\\'" . qml-mode))
+
 (provide 'lang)
