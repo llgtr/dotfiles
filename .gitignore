@@ -20,6 +20,7 @@ emacs/.lsp*
 emacs/straight
 emacs/transient
 emacs/eln-cache
+emacs/.cache
 *#
 *~
 *.elc
