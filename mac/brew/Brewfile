@@ -16,8 +16,7 @@ brew "ripgrep"
 brew "vim"
 brew "hugo"
 brew "jq"
-# brew "emacs-plus@28", args: ["with-native-comp"]
-# TODO: Wait for possible arm support
+brew "emacs-plus@28", args: ["with-native-comp"]
 
 # Casks
 cask "iterm2"
