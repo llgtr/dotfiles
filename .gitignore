@@ -21,6 +21,7 @@ emacs/straight
 emacs/transient
 emacs/eln-cache
 emacs/.cache
+emacs/org-persist
 *#
 *~
 *.elc
