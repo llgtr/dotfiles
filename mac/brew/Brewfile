@@ -16,6 +16,7 @@ brew "ripgrep"
 brew "vim"
 brew "hugo"
 brew "jq"
+brew "podman"
 brew "emacs-plus@28", args: ["with-native-comp"]
 
 # Casks
