@@ -43,7 +43,7 @@ ARG CACHEBUST=1
 RUN git clone https://github.com/be5invis/Iosevka.git
 WORKDIR /tmp/Iosevka
 
-COPY docker-iosevka.sh /
+COPY iosevka-build.sh /
 COPY private-build-plans.toml .
-CMD ["/docker-iosevka.sh"]
+CMD ["/iosevka-build.sh"]
 
