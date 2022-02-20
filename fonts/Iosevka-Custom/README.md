@@ -1,4 +1,3 @@
 ## Iosevka
 
-Contains the custom-built font and script to build new version with a Docker
-build container. Run `build.sh` with `Docker` installed to get the latest version.
+Contains a copy of the custom built font in `out`. Run `build.sh` to build a fresh version.
