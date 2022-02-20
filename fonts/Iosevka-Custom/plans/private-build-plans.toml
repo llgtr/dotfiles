@@ -1,20 +1,32 @@
-[buildPlans.iosevka-custom]
-family = "Iosevka Custom"
+[buildPlans.iosevka-term]
+family = "Iosevka Term"
 spacing = "term"
 serifs = "sans"
 no-cv-ss = true
 no-ligation = true
 
-  [buildPlans.iosevka-custom.variants]
+  [buildPlans.iosevka-term.variants]
   inherits = "ss08"
 
-    [buildPlans.iosevka-custom.variants.design]
+    [buildPlans.iosevka-term.variants.design]
+    capital-b = 'more-asymmetric-serifless'
+    capital-j = 'serifed'
+    capital-q = 'curly-tailed'
+    capital-w = 'straight'
     g = "double-storey-open"
+    i = 'serifed-flat-tailed'
+    l = 'serifed-flat-tailed'
     m = "short-leg"
+    t = 'flat-hook'
+    w = 'straight'
+    y = 'cursive'
+    zero = 'long-dotted'
+    four = 'semi-open'
+    seven = 'straight-crossbar'
     underscore = "high"
-    paren = "normal"
-    brace = "curly-flat-boundary"
+    brace = "curly"
     number-sign = "upright"
     ampersand = "et-toothless-rounded"
     at = "short"
     percent = "rings-segmented-slash"
+    question = 'corner'
