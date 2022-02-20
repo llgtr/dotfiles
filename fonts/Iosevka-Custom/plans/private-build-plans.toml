@@ -30,3 +30,14 @@ no-ligation = true
     at = "short"
     percent = "rings-segmented-slash"
     question = 'corner'
+
+  [buildPlans.iosevka-term.slopes]
+  upright = { angle = 0, shape = "upright", menu = "upright", css = "normal" }
+  italic = { angle = 9.4, shape = "italic", menu = "italic", css = "italic" }
+
+  [buildPlans.iosevka-term.weights]
+  medium = { shape = 500, menu = 500, css = 500 }
+  bold = { shape = 700, menu = 700, css = 700 }
+
+  [buildPlans.iosevka-term.widths]
+  normal = { shape = 500, menu = 5, css = "normal" }
