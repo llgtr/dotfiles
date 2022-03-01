@@ -34,3 +34,10 @@ function port_user() {
     fi
 }
 
+function fu() {
+    if [[ -v FNM_DIR ]]; then
+        fnm use
+    else
+        eval "$(fnm env)" && fnm use
+    fi
+}
