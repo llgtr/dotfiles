@@ -17,6 +17,7 @@ brew "vim"
 brew "hugo"
 brew "jq"
 brew "podman"
+brew "shellcheck"
 
 # NOTE: Check https://github.com/d12frosted/homebrew-emacs-plus/issues/309
 brew "emacs-plus@28", args: ["with-native-comp"]
