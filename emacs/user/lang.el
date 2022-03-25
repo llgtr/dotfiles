@@ -79,16 +79,15 @@
 (use-package web-mode
   :mode
   ("\\.html?\\'" . web-mode)
+  ("\\.tsx?\\'" . web-mode)
   :config
   (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
-  (setq web-mode-enable-auto-quoting nil)
-  (setq web-mode-content-types-alist
-    '(("jsx" . "/\\(rn\\|component\\)[s]?/.*\\.js[x]?\\'"))))
+  (setq web-mode-enable-auto-quoting nil))
 
 (use-package typescript-mode
-  :mode ("\\.ts[x]?\\'" . typescript-mode))
+  :mode ("\\.ts?\\'" . typescript-mode))
 
 (use-package js-mode
   :mode ("\\.js[x]?\\'" . js-mode)
