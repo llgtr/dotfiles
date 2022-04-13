@@ -94,10 +94,10 @@
     sh = shortlog --summary --numbered
 
     st = stash
-    std = "!s() { git stash drop stash@{$1}; }; s"
+    std = "!s() { git stash drop stash@{$1:-0}; }; s"
     stl = stash list
     stp = stash pop
-    sts = "!s() { git stash show -p stash@{$1}; }; s"
+    sts = "!s() { git stash show -p stash@{$1:-0}; }; s"
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
