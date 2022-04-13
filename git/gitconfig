@@ -94,6 +94,7 @@
     sh = shortlog --summary --numbered
 
     st = stash
+    std = "!s() { git stash drop stash@{$1}; }; s"
     stl = stash list
     stp = stash pop
     sts = "!s() { git stash show -p stash@{$1}; }; s"
