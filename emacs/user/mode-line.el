@@ -35,7 +35,6 @@
       (concat " " (shorten-directory default-directory 20)) " "))
 
 ;; The functions below are heavily borrowed from doom-emacs
-
 (defun buffer-info ()
   "Show info about current buffer's state"
   (cond (buffer-read-only
@@ -71,11 +70,25 @@
      " "
      (if (memq state '(edited added)) "✘" "✔"))))
 
+;; Count errors while handling more dynamic error levels
+;; Borrowed from doom-modeline
+(defun custom--flycheck-count-errors ()
+  (let ((info 0) (warning 0) (error 0))
+    (mapc
+     (lambda (item)
+       (let ((count (cdr item)))
+         (pcase (flycheck-error-level-compilation-level (car item))
+           (0 (cl-incf info count))
+           (1 (cl-incf warning count))
+           (2 (cl-incf error count)))))
+     (flycheck-count-errors flycheck-current-errors))
+    `((info . ,info) (warning . ,warning) (error . ,error))))
+
 (defun flycheck-error-info ()
   "Show Flycheck's state"
   (pcase flycheck-last-status-change
     ('finished (if flycheck-current-errors
-                   (let-alist (flycheck-count-errors flycheck-current-errors)
+                   (let-alist (custom--flycheck-count-errors)
                      (let ((infos (or .info 0))
                            (warnings (or .warning 0))
                            (errors (or .error 0)))
