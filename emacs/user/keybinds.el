@@ -79,7 +79,7 @@
    "jw" 'evil-avy-goto-word-1
    "jl" 'evil-avy-goto-line
    "jd" 'dumb-jump-go
-   "jb" 'dumb-jump-back
+   "jb" 'xref-pop-marker-stack
    "jq" 'dumb-jump-quick-look
 
    ;; LSP
