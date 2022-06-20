@@ -24,6 +24,15 @@
         lsp-log-io nil
         lsp-rust-server 'rust-analyzer))
 
+(use-package lsp-ui
+  :after lsp-mode
+  :init
+  (setq lsp-ui-sideline-show-diagnostics nil
+        lsp-ui-sideline-show-code-actions nil
+        lsp-ui-sideline-show-hover t
+        lsp-ui-sideline-delay 0.5
+        lsp-ui-doc-enable nil))
+
 (use-package lsp-dart
   :after (dart-mode lsp-mode))
 

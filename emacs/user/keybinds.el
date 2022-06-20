@@ -86,8 +86,8 @@
    "l" '(:ignore t :wk "LSP")
    "l?" 'lsp-describe-session
    "le" 'lsp-execute-code-action
-   "lfd" 'lsp-find-definition
-   "lfr" 'lsp-find-references
+   "lfd" 'lsp-ui-peek-find-definitions
+   "lfr" 'lsp-ui-peek-find-references
    "lF" 'lsp-format-buffer
    "ld" 'lsp-describe-thing-at-point
    "lr" 'lsp-rename
