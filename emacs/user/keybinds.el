@@ -129,7 +129,7 @@
    "w%" 'split-window-right
    "w=" 'balance-windows
    "wd" 'delete-window
-   "wD" 'delete-other-windows
+   "wD" 'ace-delete-window
    "ws" 'ace-swap-window
 
    ;; Quit
