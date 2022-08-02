@@ -5,7 +5,7 @@
 ;; LSP and friends
 (use-package lsp-mode
   :commands lsp
-  :hook ((python-mode rust-mode dart-mode typescript-mode web-mode) . lsp)
+  :hook ((python-mode rust-mode dart-mode typescript-mode web-mode js-mode) . lsp)
   :init
   (setq read-process-output-max (* 1024 1024)
         lsp-headerline-breadcrumb-enable nil
