@@ -27,10 +27,11 @@
 (use-package lsp-ui
   :after lsp-mode
   :init
-  (setq lsp-ui-sideline-show-diagnostics nil
+  (setq lsp-ui-sideline-show-diagnostics t
         lsp-ui-sideline-show-code-actions nil
         lsp-ui-sideline-show-hover t
         lsp-ui-sideline-delay 0.5
+        lsp-ui-sideline-enable nil
         lsp-ui-doc-enable nil))
 
 (use-package lsp-dart

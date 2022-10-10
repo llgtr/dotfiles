@@ -118,6 +118,7 @@
    ;; Toggles
    "t" '(:ignore t :wk "Toggles")
    "tw" 'whitespace-mode
+   "ts" 'lsp-ui-sideline-mode
 
    "T" '(:ignore t :wk "UI toggles")
    "Tt" 'tool-bar-mode
