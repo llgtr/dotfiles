@@ -34,9 +34,6 @@
         lsp-ui-sideline-enable nil
         lsp-ui-doc-enable nil))
 
-(use-package lsp-dart
-  :after (dart-mode lsp-mode))
-
 (use-package flycheck
   :hook (lsp-mode . flycheck-mode))
 
@@ -73,17 +70,10 @@
   :hook ((clojure-mode . rainbow-delimiters-mode)
          (emacs-lisp-mode . rainbow-delimiters-mode)))
 
-(use-package cider
-  :after clojure-mode)
-
 ;; Haskell
 (use-package haskell-mode
   :mode ("\\.hs\\'" . haskell-mode)
   :hook (haskell-mode . interactive-haskell-mode))
-
-;; Elm
-(use-package elm-mode
-  :mode ("\\.elm\\'" . elm-mode))
 
 ;; Web mode
 (use-package web-mode
@@ -108,13 +98,5 @@
 (use-package markdown-mode
   :mode
   ("\\.md?\\'" . markdown-mode))
-
-(use-package dart-mode
-  :mode
-  ("\\.dart?\\'" . dart-mode))
-
-(use-package qml-mode
-  :mode
-  ("\\.qml?\\'" . qml-mode))
 
 (provide 'lang)
