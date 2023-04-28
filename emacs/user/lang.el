@@ -70,11 +70,6 @@
   :hook ((clojure-mode . rainbow-delimiters-mode)
          (emacs-lisp-mode . rainbow-delimiters-mode)))
 
-;; Haskell
-(use-package haskell-mode
-  :mode ("\\.hs\\'" . haskell-mode)
-  :hook (haskell-mode . interactive-haskell-mode))
-
 ;; Web mode
 (use-package web-mode
   :mode
@@ -94,9 +89,5 @@
         ("\\.json?\\'" . js-mode)
   :straight (:type built-in))
 
-;; Markdown
-(use-package markdown-mode
-  :mode
-  ("\\.md?\\'" . markdown-mode))
 
 (provide 'lang)
