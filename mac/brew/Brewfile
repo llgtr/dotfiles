@@ -3,7 +3,6 @@
 # Taps
 tap "homebrew/bundle"
 tap "homebrew/core"
-tap "d12frosted/emacs-plus"
 
 # Formulae
 brew "zsh"
@@ -20,8 +19,6 @@ brew "podman"
 brew "shellcheck"
 brew "fnm"
 
-# NOTE: Check https://github.com/d12frosted/homebrew-emacs-plus/issues/309
-brew "emacs-plus@28", args: ["with-native-comp"]
-
 # Casks
 cask "iterm2"
+cask "emacs"
