@@ -1,4 +1,5 @@
+FPATH="/opt/homebrew/share/zsh/site-functions:${FPATH}"
+
 # Source all relevant files
 for config ($HOME/.zsh/*.zsh) source $config
 
-FPATH="/opt/homebrew/share/zsh/site-functions:${FPATH}"
