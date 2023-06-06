@@ -49,4 +49,13 @@ setopt HIST_VERIFY # Dont execute outright when entering line w/ hist expansion
 setopt CHASE_LINKS # Resolve symlinks to their true values
 setopt NO_LIST_BEEP # Dont beep on an ambiguous completion
 setopt PROMPT_SUBST # Allow parameter/arithmetic expansion & command substitution
-setopt AUTO_MENU
+setopt AUTO_MENU # Show completion menu after a successive tab press
+setopt COMPLETE_IN_WORD # Complete from both ends of a word.
+setopt ALWAYS_TO_END # Move cursor to the end of a completed word.
+setopt PATH_DIRS # Perform path search even on command names with slashes.
+setopt AUTO_LIST # Automatically list choices on ambiguous completion.
+setopt AUTO_PARAM_SLASH # If completed parameter is a directory, add a trailing slash.
+setopt EXTENDED_GLOB # Needed for file modification glob modifiers with compinit.
+unsetopt MENU_COMPLETE # Do not autoselect the first completion entry.
+unsetopt FLOW_CONTROL # Disable start/stop characters in shell editor.
+
