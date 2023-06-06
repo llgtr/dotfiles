@@ -9,15 +9,19 @@ bindkey -v
 
 # Init better autocomplete
 autoload -Uz compinit
-zstyle ':completion:*' insert-tab false
-# This nifty little hack is taken from prezto
-_zcomp_modified=(${ZDOTDIR:-$HOME}/.zcompdump(Nmh-20)) # Match if modified within 20 hours
-if [[ $#_zcomp_modified -gt 0 ]]; then
-    compinit -i -C
+_zcomp_path="${HOME}/.zcompdump"
+# Match if modified within 20 hours
+if [[ $_zcomp_path(#qNmh-20) ]]; then
+    compinit -C
 else
     compinit -i
+    touch "$_zcomp_path"
 fi
-unset _zcomp_modified
+unset _zcomp_path
+
+zstyle ':completion:*'  list-colors '=*=90' # Color all completions bright gray
+zstyle ':completion::complete:*' use-cache on # Make slower completions usable
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
 
 REPORTTIME=10 # Will show a readout when system+user time passes the value
 REPORTTIME_TOTAL=10 # Will show a readout when total time passes the value
