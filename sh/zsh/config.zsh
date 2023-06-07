@@ -19,6 +19,7 @@ else
 fi
 unset _zcomp_path
 
+zstyle ':completion:*' menu select
 zstyle ':completion:*'  list-colors '=*=90' # Color all completions bright gray
 zstyle ':completion::complete:*' use-cache on # Make slower completions usable
 zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
