@@ -17,9 +17,9 @@ cmd_execution_time() {
 	(( minutes > 0 )) && human+="${minutes}m "
     human+="${seconds}s"
 
-    # Output: Execution time and timestamp (ISO 8601)
+    # Output: Execution time and timestamp
     (( $elapsed > $REPORTTIME_TOTAL )) && print -P \
-        "%F{yellow}${human}%f %F{245}-> $(date -u +"%Y-%m-%dT%H:%M:%SZ")%f"
+        "%F{yellow}${human}%F{245} @ $(date +"%Y-%m-%dT%H:%M:%S%z")%f"
 }
 
 preexec() {
