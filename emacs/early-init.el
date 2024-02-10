@@ -1,9 +1,11 @@
 ;;; -*- lexical-binding: t -*-
 
 ;; Set garbage collection
-(setq gc-cons-threshold (* 256 1024 1024))
+(setq gc-cons-threshold most-positive-fixnum
+      gc-cons-percentage 0.5)
 (add-hook 'emacs-startup-hook
-          (lambda () (setq gc-cons-threshold (* 128 1024 1024))))
+          (lambda () (setq gc-cons-threshold (* 128 1024 1024)
+                           gc-cons-percentage 0.2)))
 
 (setq package-enable-at-startup nil)
 (advice-add #'package--ensure-init-file :override #'ignore)
