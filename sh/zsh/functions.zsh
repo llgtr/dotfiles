@@ -10,20 +10,6 @@ function echo_c {
     echo "${setbold:-}${setcolor}$1${setnormal}"
 }
 
-# Timer for various simple timing needs.
-# $1: time in seconds (mandatory)
-function timer {
-    if [[ $1 == "" ]]; then
-        echo "$(echo_c "ERROR:" 1 -b) Missing parameter"
-        return
-    elif ! [[ $1 =~ '^[0-9]+$' ]]; then
-        echo "$(echo_c "ERROR:" 1 -b) Not a number"
-        return
-    fi
-
-    for i in {1..$1}; do sleep 1; echo -n -e $i\\r; done
-}
-
 # Find process using a port
 # $1: port number
 function port_user() {
@@ -34,6 +20,7 @@ function port_user() {
     fi
 }
 
+# Wrapper for using fnm without having to load it for each shell
 function fu() {
     if [[ -v FNM_DIR ]]; then
         fnm use
