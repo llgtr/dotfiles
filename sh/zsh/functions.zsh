@@ -30,20 +30,21 @@ function fu() {
 }
 
 # Find and extract files matching given extension from given directory
-# $1: File extension
-# $2: Source directory
+# $1: Source directory
+# $2: File extension
 function extract_files() {
     if [[ -z "$1" || -z "$2" ]]; then
         echo "$(echo_c "ERROR:" 1 -b) Invalid parameters" >&2
+        echo "Usage: extract_files $(tput smul)source_directory$(tput rmul) $(tput smul)file_extension$(tput rmul)"
         return 1
     fi
 
-    local FILE_EXTENSION="$1"
-    local SOURCE_DIR="$2"
+    local SOURCE_DIR="$1"
+    local FILE_EXTENSION="$2"
     local TARGET_DIR="${FILE_EXTENSION#.}"
 
-    echo "This will extract files from $(realpath $SOURCE_DIR)"
-    printf "%s" "$(echo_c "Are you sure [y/n]? " 3)"
+    echo "This will move matching files from $(realpath $SOURCE_DIR) to $(realpath $TARGET_DIR)"
+    printf "%s" "$(echo_c "Continue [y/n]? " 3)"
     read -r -n 1
     mkdir -p "$TARGET_DIR"
 
