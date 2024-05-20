@@ -122,8 +122,6 @@ link_file "tmux/tmux.conf" ".tmux.conf"
 if [[ "$(uname -s)" == "Darwin" ]]; then
     echo_c "Running MacOS-specific stuff." 2 -b
 
-    link_file "mac/scripts/music.scpt" ".local/bin/music_tmux"
-
     ask_user "Run defaults.sh [y/n]?" 1
     if [[ "$REPLY" =~ [yY] ]]; then
         sh "$SCRIPT_DIR/mac/defaults.sh" || true
