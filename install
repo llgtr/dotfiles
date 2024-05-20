@@ -117,7 +117,6 @@ link_file "git/gitmessage" ".gitmessage"
 link_file "vim/vimrc" ".vimrc"
 link_file "vim/" ".vim"
 link_file "emacs/" ".emacs.d"
-link_file "lein/profiles.clj" ".lein/profiles.clj"
 link_file "tmux/tmux.conf" ".tmux.conf"
 
 if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -155,13 +154,6 @@ elif [[ "$(uname -s)" == "Linux" ]]; then
     link_file "linux/rofi/config.rasi" ".config/rofi/config.rasi"
     link_file "linux/dunst/dunstrc" ".config/dunst/dunstrc"
     link_file "linux/notify-send.sh/notify-send.sh" ".local/bin/notify-send.sh"
-
-    if [[ ! -e $HOME/.local/bin/lein ]]; then
-        ask_user "Run lein_install.sh [y/n]?" 1
-        if [[ "$REPLY" =~ [yY] ]]; then
-            sh "$SCRIPT_DIR/linux/scripts/lein_install.sh"
-        fi
-    fi
 fi
 
 echo_c "Done." 2 -b
