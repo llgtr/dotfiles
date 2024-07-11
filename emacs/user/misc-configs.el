@@ -31,7 +31,7 @@
         delete-old-versions -1))
 
 ;; Set font
-(add-to-list 'default-frame-alist '(font . "Iosevka Term 12"))
+(add-to-list 'default-frame-alist '(font . "Iosevka Facile 12"))
 
 ;; Appearance
 (blink-cursor-mode 0)
