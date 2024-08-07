@@ -14,7 +14,7 @@
    :keymaps 'override
 
    ;; General binds
-   "SPC" '(execute-extended-command :wk "counsel-M-x")
+   "SPC" 'evil-avy-goto-word-1
    "TAB" 'ace-window
    "DEL" 'evil-switch-to-windows-last-buffer
    "!" 'shell-command
@@ -22,6 +22,7 @@
    "?" 'emacs-init-time
    "0" 'text-scale-adjust
    ":" 'eval-expression
+   "x" '(execute-extended-command :wk "counsel-M-x")
 
    ;; Applications
    "a" '(:ignore t :wk "Applications")
@@ -75,9 +76,8 @@
 
    ;; Jump
    "j" '(:ignore t :wk "Jump")
-   "jc" 'evil-avy-goto-char-2
+   "jc" 'evil-avy-goto-char-timer
    "jw" 'evil-avy-goto-word-1
-   "jl" 'evil-avy-goto-line
    "jd" 'dumb-jump-go
    "jb" 'xref-pop-marker-stack
    "jq" 'dumb-jump-quick-look
@@ -169,16 +169,6 @@
    "tic" 'org-table-insert-column
    "tdr" 'org-table-kill-row
    "tdc" 'org-table-delete-column)
-
-  ;; Clojure(script)-mode
-  (general-define-key
-   :states '(normal visual)
-   :prefix main-major-mode-leader-key
-   :keymaps 'clojure-mode-map
-
-   "c" 'cider-jack-in
-   ;; TODO: cider bindings
-   )
 
   ;; Editable dired
   (general-define-key
