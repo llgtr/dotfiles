@@ -113,4 +113,8 @@
 (use-package magit
   :commands magit-status magit-blame)
 
+(use-package copilot
+  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+  :bind (:map copilot-completion-map ("TAB" . copilot-accept-completion)))
+
 (provide 'packages)
