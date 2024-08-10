@@ -5,7 +5,7 @@
 ;; LSP and friends
 (use-package lsp-mode
   :commands lsp
-  :hook ((python-mode rust-mode dart-mode typescript-mode web-mode js-mode) . lsp)
+  :hook ((rust-mode typescript-ts-mode tsx-ts-mode web-mode) . lsp)
   :init
   (setq read-process-output-max (* 1024 1024)
         lsp-headerline-breadcrumb-enable nil
@@ -56,14 +56,9 @@
 
 ;; Rust
 (use-package rust-mode
-  :mode ("\\.rs\\'"   . rust-mode)
-        ("\\.rlib\\'" . rust-mode))
-
-;; Clojure
-(use-package clojure-mode
-  :mode ("\\.clj\\'"  . clojure-mode)
-        ("\\.cljs\\'" . clojurescript-mode)
-        ("\\.cljc\\'" . clojurec-mode))
+  :mode
+  ("\\.rs\\'"   . rust-mode)
+  ("\\.rlib\\'" . rust-mode))
 
 (use-package rainbow-delimiters
   :after (:any clojure-mode lisp-mode)
@@ -81,13 +76,14 @@
   (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
   (setq web-mode-enable-auto-quoting nil))
 
-(use-package typescript-mode
-  :mode ("\\.ts?\\'" . typescript-mode))
-
-(use-package js-mode
-  :mode ("\\.js[x]?\\'" . js-mode)
-        ("\\.json?\\'" . js-mode)
-  :straight (:type built-in))
-
+(use-package tree-sitter
+  :init
+  (setq treesit-language-source-alist
+        '((tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+          (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")))
+  (setq treesit-font-lock-level 4)
+  :mode
+  ("\\.ts?\\'" . typescript-ts-mode)
+  ("\\.tsx?\\'" . tsx-ts-mode))
 
 (provide 'lang)

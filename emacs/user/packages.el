@@ -103,9 +103,6 @@
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-force-searcher 'rg))
 
-(use-package esup
-  :commands esup)
-
 (use-package hl-todo
   :demand t
   :config (global-hl-todo-mode))
