@@ -3,8 +3,10 @@
 set -euo pipefail
 
 EXTENSIONS=(
-    ms-vscode.Theme-TomorrowKit
+    jdinhlife.gruvbox
     vscodevim.vim
+    VSpaceCode.whichkey
+    esbenp.prettier-vscode
 )
 
 for i in "${EXTENSIONS[@]}"; do

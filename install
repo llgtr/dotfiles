@@ -122,6 +122,9 @@ link_file "tmux/tmux.conf" ".tmux.conf"
 if [[ "$(uname -s)" == "Darwin" ]]; then
     echo_c "Running MacOS-specific stuff." 2 -b
 
+    link_file "vscode/settings.json" "Library/Application Support/Code/User/settings.json"
+    link_file "vscode/keybindings.json" "Library/Application Support/Code/User/keybindings.json"
+
     ask_user "Run defaults.sh [y/n]?" 1
     if [[ "$REPLY" =~ [yY] ]]; then
         sh "$SCRIPT_DIR/mac/defaults.sh" || true

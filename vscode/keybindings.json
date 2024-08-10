@@ -1,0 +1,17 @@
+[
+  {
+    "key": "space",
+    "command": "whichkey.show",
+    "when": "activeEditorGroupEmpty && focusedView == '' && !whichkeyActive && !inputFocus"
+  },
+  {
+    "key": "space",
+    "command": "whichkey.show",
+    "when": "sideBarFocus && !inputFocus && !whichkeyActive"
+  },
+  {
+    "key": "tab",
+    "command": "editor.action.reindentselectedlines",
+    "when": "editorTextFocus && !suggestWidgetVisible && !inlineSuggestionVisible && vim.mode == 'Insert'"
+  }
+]
