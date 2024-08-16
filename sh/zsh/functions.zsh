@@ -43,13 +43,18 @@ function extract_files() {
     local FILE_EXTENSION="$2"
     local TARGET_DIR="${FILE_EXTENSION#.}"
 
-    echo "This will move matching files from $(realpath $SOURCE_DIR) to $(realpath $TARGET_DIR)"
-    printf "%s" "$(echo_c "Continue [y/n]? " 3)"
-    read -r -n 1
-    mkdir -p "$TARGET_DIR"
+    read -q "REPLY?$(echo_c "Create directory '${TARGET_DIR}'? " 3)"
+    if [[ "$REPLY" =~ [yY] ]]; then
+        mkdir -p "$TARGET_DIR"
+    fi
 
-    find "$SOURCE_DIR" -type f -name "*$FILE_EXTENSION" | while read -r file; do
-        echo "Moving $file"
-        mv "$file" "$TARGET_DIR"
-    done
+    echo "\n$(echo_c "This will move matching files from" 3) $(realpath $SOURCE_DIR) $(echo_c "to" 3) $(realpath $TARGET_DIR)"
+    read -q "REPLY?$(echo_c "Continue? " 3)"
+    if [[ "$REPLY" =~ [yY] ]]; then
+        echo
+        find "$SOURCE_DIR" -type f -name "*$FILE_EXTENSION" | while read -r file; do
+            echo "$(echo_c "Moving" 6) $file $(echo_c "to" 6) $TARGET_DIR"
+            mv "$file" "$TARGET_DIR"
+        done
+    fi
 }
