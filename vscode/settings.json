@@ -20,7 +20,7 @@
   "editor.hover.enabled": false,
 
   // Workbench
-  "workbench.colorTheme": "Gruvbox Dark Medium",
+  "workbench.colorTheme": "Gruvbox Dark Soft",
   "workbench.editor.showIcons": false,
   "workbench.startupEditor": "none",
   "workbench.editor.enablePreview": false,
@@ -42,9 +42,11 @@
   "workbench.editor.dragToOpenWindow": false,
   "workbench.editor.mouseBackForwardToNavigate": false,
   "workbench.settings.enableNaturalLanguageSearch": false,
-  "workbench.preferredDarkColorTheme": "Gruvbox Dark Medium",
   "workbench.layoutControl.enabled": false,
   "workbench.editor.showTabs": "none",
+  "workbench.colorCustomizations": {
+    "scrollbar.shadow": "#ff00ff00"
+  },
 
   // Explorer
   "explorer.autoReveal": false,
@@ -125,6 +127,12 @@
       "bindings": [
         {
           "key": "b",
+          "name": "Show buffers in current group",
+          "type": "command",
+          "command": "workbench.action.showEditorsInActiveGroup"
+        },
+        {
+          "key": "B",
           "name": "Show all buffers",
           "type": "command",
           "command": "workbench.action.showAllEditorsByMostRecentlyUsed"
@@ -134,6 +142,12 @@
           "name": "Close active buffer",
           "type": "command",
           "command": "workbench.action.closeActiveEditor"
+        },
+        {
+          "key": "D",
+          "name": "Close other buffers in group",
+          "type": "command",
+          "command": "workbench.action.closeOtherEditors"
         },
         {
           "key": "n",
