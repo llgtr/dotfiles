@@ -20,7 +20,7 @@
   "editor.hover.enabled": false,
 
   // Workbench
-  "workbench.colorTheme": "Gruvbox Dark Soft",
+  "workbench.colorTheme": "Nord",
   "workbench.editor.showIcons": false,
   "workbench.startupEditor": "none",
   "workbench.editor.enablePreview": false,

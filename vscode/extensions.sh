@@ -3,7 +3,7 @@
 set -euo pipefail
 
 EXTENSIONS=(
-    jdinhlife.gruvbox
+    arcticicestudio.nord-visual-studio-code
     vscodevim.vim
     VSpaceCode.whichkey
     esbenp.prettier-vscode
