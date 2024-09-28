@@ -118,6 +118,7 @@ link_file "vim/vimrc" ".vimrc"
 link_file "vim/" ".vim"
 link_file "emacs/" ".emacs.d"
 link_file "tmux/tmux.conf" ".tmux.conf"
+link_file "alacritty/" ".config/alacritty"
 
 if [[ "$(uname -s)" == "Darwin" ]]; then
     echo_c "Running MacOS-specific stuff." 2 -b
