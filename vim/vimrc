@@ -4,8 +4,7 @@ set encoding=utf-8
 " Colors
 " " " " "
 set background=dark
-colorscheme base16-gruvbox-dark-pale
-let base16colorspace=256
+colorscheme nord
 
 "
 " General
