@@ -9,11 +9,11 @@ TERM = "xterm-256color"
 dimensions = { columns = 160, lines = 40 }
 padding.x = 20
 padding.y = 20
-decorations = "None"
+decorations = "Full"
+decorations_theme_variant = "Light"
 option_as_alt = "Both"
 resize_increments = true
 
 [font]
 normal.family = "Iosevka Facile"
-
 size = 12
