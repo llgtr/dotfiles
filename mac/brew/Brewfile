@@ -2,7 +2,6 @@
 
 # Taps
 tap "homebrew/bundle"
-tap "homebrew/core"
 
 # Formulae
 brew "zsh"
