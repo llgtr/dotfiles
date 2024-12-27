@@ -1,0 +1,9 @@
+font-size = 12
+font-family = Iosevka Facile
+
+macos-titlebar-style = transparent
+
+window-padding-x = 10
+window-padding-y = 10
+
+window-inherit-working-directory = false
