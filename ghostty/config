@@ -1,9 +1,18 @@
+# Style
 font-size = 12
 font-family = Iosevka Facile
+theme = nord
 
-macos-titlebar-style = transparent
-
+# Window
 window-padding-x = 10
 window-padding-y = 10
 
+# General
 window-inherit-working-directory = false
+shell-integration-features = no-cursor
+cursor-style-blink = false
+
+# MacOS
+macos-titlebar-style = transparent
+macos-titlebar-proxy-icon = hidden
+macos-option-as-alt = left
