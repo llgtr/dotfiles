@@ -6,6 +6,7 @@ theme = nord
 # Window
 window-padding-x = 10
 window-padding-y = 10
+title = " "
 
 # General
 window-inherit-working-directory = false
