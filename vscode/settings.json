@@ -341,9 +341,9 @@
         },
         {
           "key": "F",
-          "name": "Open file explorer",
+          "name": "Open folder",
           "type": "command",
-          "command": "workbench.action.files.openFileFolder"
+          "command": "workbench.action.files.openFolder"
         }
       ]
     },
