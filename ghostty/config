@@ -6,6 +6,10 @@ theme = nord
 # Window
 window-padding-x = 10
 window-padding-y = 10
+window-width = 240
+window-height = 55
+window-step-resize = true
+resize-overlay = always
 title = " "
 
 # General
