@@ -145,9 +145,9 @@
         },
         {
           "key": "D",
-          "name": "Close other buffers in group",
+          "name": "Close all buffers in group",
           "type": "command",
-          "command": "workbench.action.closeOtherEditors"
+          "command": "workbench.action.closeAllEditors"
         },
         {
           "key": "n",
@@ -445,6 +445,11 @@
   "debug.showInStatusBar": "never",
   "problems.showCurrentInStatus": true,
   "git.enableStatusBarSync": false,
+  "github.copilot.editor.enableAutoCompletions": false,
+  "chat.implicitContext.enabled": {
+    "panel": "never",
+    "editing-session": "never"
+  },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
