@@ -13,10 +13,12 @@ function echo_c {
 # Find process using a port
 # $1: port number
 function port_user() {
+    local ports="$(lsof -iTCP -sTCP:LISTEN -n -P)"
     if [[ $# -eq 1 ]]; then
-       lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+        echo "${ports}" | head -n 1
+        echo "${ports}" | grep -i --color $1
     else
-       lsof -iTCP -sTCP:LISTEN -n -P
+        echo "${ports}"
     fi
 }
 
