@@ -88,6 +88,11 @@ function setup_gitconfig {
     ask_user "What is your git user.name?" 0 git_authorname
     ask_user "What is your git user.email?" 0 git_authoremail
 
+    if [[ "$git_authorname" == *"/"* || "$git_authoremail" == *"/"* ]]; then
+        echo_c "Error: Your git username or email contains a delimiting character" 1 -b
+        exit 1
+    fi
+
     local git_credential='cache'
     if [[ "$(uname -s)" == "Darwin" ]]; then
         local git_credential='osxkeychain'
