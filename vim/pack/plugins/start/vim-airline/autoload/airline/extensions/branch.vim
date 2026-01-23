@@ -1,15 +1,8 @@
-" MIT License. Copyright (c) 2013-2016 Bailey Ling et al.
+" MIT License. Copyright (c) 2013-2021 Bailey Ling et al.
+" Plugin: fugitive, gina, lawrencium and vcscommand
 " vim: et ts=2 sts=2 sw=2
 
 scriptencoding utf-8
-
-let s:has_fugitive = exists('*fugitive#head')
-let s:has_lawrencium = exists('*lawrencium#statusline')
-let s:has_vcscommand = get(g:, 'airline#extensions#branch#use_vcscommand', 0) && exists('*VCSCommandGetStatusLine')
-
-if !s:has_fugitive && !s:has_lawrencium && !s:has_vcscommand
-  finish
-endif
 
 " s:vcs_config contains static configuration of VCSes and their status relative
 " to the active file.
@@ -24,19 +17,23 @@ endif
 let s:vcs_config = {
 \  'git': {
 \    'exe': 'git',
-\    'cmd': 'git status --porcelain -- ',
+\    'cmd': 'git --no-optional-locks status --porcelain -- ',
+\    'dirty': 'git --no-optional-locks status -uno --porcelain --ignore-submodules',
 \    'untracked_mark': '??',
-\    'update_branch': 's:update_git_branch',
 \    'exclude': '\.git',
+\    'update_branch': 's:update_git_branch',
+\    'display_branch': 's:display_git_branch',
 \    'branch': '',
 \    'untracked': {},
 \  },
 \  'mercurial': {
 \    'exe': 'hg',
 \    'cmd': 'hg status -u -- ',
+\    'dirty': 'hg status -mard',
 \    'untracked_mark': '?',
 \    'exclude': '\.hg',
 \    'update_branch': 's:update_hg_branch',
+\    'display_branch': 's:display_hg_branch',
 \    'branch': '',
 \    'untracked': {},
 \  },
@@ -57,6 +54,7 @@ function! s:init_buffer()
     let b:buffer_vcs_config[vcs] = {
           \     'branch': '',
           \     'untracked': '',
+          \     'dirty': 0,
           \   }
   endfor
   unlet! b:airline_head
@@ -83,50 +81,84 @@ endif
 
 
 " Fugitive special revisions. call '0' "staging" ?
-let s:names = {'0': 'index', '1': 'ancestor', '2':'target', '3':'merged'}
+let s:names = {'0': 'index', '1': 'orig', '2':'fetch', '3':'merge'}
 let s:sha1size = get(g:, 'airline#extensions#branch#sha1_len', 7)
 
 function! s:update_git_branch()
-  if !s:has_fugitive
+  call airline#util#ignore_next_focusgain()
+  if airline#util#has_fugitive()
+    call s:config_fugitive_branch()
+  elseif airline#util#has_gina()
+    call s:config_gina_branch()
+  else
     let s:vcs_config['git'].branch = ''
     return
   endif
+endfunction
 
-  let name = fugitive#head(s:sha1size)
+function! s:config_fugitive_branch() abort
+  let s:vcs_config['git'].branch =  FugitiveHead(s:sha1size)
+  if s:vcs_config['git'].branch is# 'master' &&
+        \ airline#util#winwidth() < 81
+    " Shorten default a bit
+    let s:vcs_config['git'].branch='mas'
+  endif
+endfunction
 
+function! s:config_gina_branch() abort
   try
-    let commit = fugitive#buffer().commit()
+    let g:gina#component#repo#commit_length = s:sha1size
+    let s:vcs_config['git'].branch = gina#component#repo#branch()
+  catch
+  endtry
+  if s:vcs_config['git'].branch is# 'master' &&
+        \ airline#util#winwidth() < 81
+    " Shorten default a bit
+    let s:vcs_config['git'].branch='mas'
+  endif
+endfunction
+
+function! s:display_git_branch()
+  let name = b:buffer_vcs_config['git'].branch
+  try
+    let commit = matchstr(FugitiveParse()[0], '^\x\+')
 
     if has_key(s:names, commit)
       let name = get(s:names, commit)."(".name.")"
     elseif !empty(commit)
-      let ref = fugitive#repo().git_chomp('describe', '--all', '--exact-match', commit)
-      if ref !~ "^fatal: no tag exactly matches"
+      if exists('*FugitiveExecute')
+        let ref = FugitiveExecute(['describe', '--all', '--exact-match', commit], bufnr('')).stdout[0]
+      else
+        noautocmd let ref = fugitive#repo().git_chomp('describe', '--all', '--exact-match', commit)
+        if ref =~# ':'
+          let ref = ''
+        endif
+      endif
+      if !empty(ref)
         let name = s:format_name(substitute(ref, '\v\C^%(heads/|remotes/|tags/)=','',''))."(".name.")"
       else
-        let name = commit[0:s:sha1size-1]."(".name.")"
+        let name = matchstr(commit, '.\{'.s:sha1size.'}')."(".name.")"
       endif
     endif
   catch
   endtry
-
-  let s:vcs_config['git'].branch = name
+  return name
 endfunction
 
 function! s:update_hg_branch()
-  if s:has_lawrencium
+  if airline#util#has_lawrencium()
     let cmd='LC_ALL=C hg qtop'
     let stl=lawrencium#statusline()
     let file=expand('%:p')
     if !empty(stl) && get(b:, 'airline_do_mq_check', 1)
       if g:airline#init#vim_async
-        call airline#async#get_mq_async(cmd, file)
+        noa call airline#async#get_mq_async(cmd, file)
       elseif has("nvim")
-        call airline#async#nvim_get_mq_async(cmd, file)
+        noa call airline#async#nvim_get_mq_async(cmd, file)
       else
         " remove \n at the end of the command
         let output=system(cmd)[0:-2]
-        call airline#async#mq_output(output, file)
+        noa call airline#async#mq_output(output, file)
       endif
     endif
     " do not do mq check anymore
@@ -142,6 +174,10 @@ function! s:update_hg_branch()
   else
     let s:vcs_config['mercurial'].branch = ''
   endif
+endfunction
+
+function! s:display_hg_branch()
+  return b:buffer_vcs_config['mercurial'].branch
 endfunction
 
 function! s:update_branch()
@@ -165,11 +201,12 @@ endfunction
 
 function! s:update_untracked()
   let file = expand("%:p")
-  if empty(file) || isdirectory(file)
+  if empty(file) || isdirectory(file) || !empty(&buftype)
     return
   endif
 
   let needs_update = 1
+  let vcs_checks   = get(g:, "airline#extensions#branch#vcs_checks", ["untracked", "dirty"])
   for vcs in keys(s:vcs_config)
     if file =~ s:vcs_config[vcs].exclude
       " Skip check for files that live in the exclude directory
@@ -186,17 +223,25 @@ function! s:update_untracked()
   endif
 
   for vcs in keys(s:vcs_config)
+    " only check, for git, if fugitive is installed
+    " and for 'hg' if lawrencium is installed, else skip
+    if vcs is# 'git' && (!airline#util#has_fugitive() && !airline#util#has_gina())
+      continue
+    elseif vcs is# 'mercurial' && !airline#util#has_lawrencium()
+      continue
+    endif
     let config = s:vcs_config[vcs]
-    if g:airline#init#vim_async
-      " Note that asynchronous update updates s:vcs_config only, and only
-      " s:update_untracked updates b:buffer_vcs_config. If s:vcs_config is
-      " invalidated again before s:update_untracked is called, then we lose the
-      " result of the previous call, i.e. the head string is not updated. It
-      " doesn't happen often in practice, so we let it be.
-      call airline#async#vim_vcs_untracked(config, file)
-    else
-      " nvim async or vim without job-feature
-      call airline#async#nvim_vcs_untracked(config, file, vcs)
+    " Note that asynchronous update updates s:vcs_config only, and only
+    " s:update_untracked updates b:buffer_vcs_config. If s:vcs_config is
+    " invalidated again before s:update_untracked is called, then we lose the
+    " result of the previous call, i.e. the head string is not updated. It
+    " doesn't happen often in practice, so we let it be.
+    if index(vcs_checks, 'untracked') > -1
+      call airline#async#vcs_untracked(config, file, vcs)
+    endif
+    " Check clean state of repo
+    if index(vcs_checks, 'dirty') > -1
+      call airline#async#vcs_clean(config.dirty, file, vcs)
     endif
   endfor
 endfunction
@@ -216,53 +261,77 @@ function! airline#extensions#branch#head()
   let b:airline_head = ''
   let vcs_priority = get(g:, "airline#extensions#branch#vcs_priority", ["git", "mercurial"])
 
-  let heads = {}
+  let heads = []
   for vcs in vcs_priority
     if !empty(b:buffer_vcs_config[vcs].branch)
-      let heads[vcs] = b:buffer_vcs_config[vcs].branch
+      let heads += [vcs]
     endif
   endfor
 
-  for vcs in keys(heads)
+  for vcs in heads
     if !empty(b:airline_head)
       let b:airline_head .= ' | '
     endif
-    let b:airline_head .= (len(heads) > 1 ? s:vcs_config[vcs].exe .':' : '') . s:format_name(heads[vcs])
-    let b:airline_head .= b:buffer_vcs_config[vcs].untracked
+    if len(heads) > 1
+      let b:airline_head .= s:vcs_config[vcs].exe .':'
+    endif
+    let b:airline_head .= s:format_name({s:vcs_config[vcs].display_branch}())
+    let additional = b:buffer_vcs_config[vcs].untracked
+    if empty(additional) &&
+          \ has_key(b:buffer_vcs_config[vcs], 'dirty') &&
+          \ b:buffer_vcs_config[vcs].dirty
+      let additional = g:airline_symbols['dirty']
+    endif
+    let b:airline_head .= additional
   endfor
 
   if empty(heads)
-    if s:has_vcscommand
-      call VCSCommandEnableBufferSetup()
+    if airline#util#has_vcscommand()
+      noa call VCSCommandEnableBufferSetup()
       if exists('b:VCSCommandBufferInfo')
         let b:airline_head = s:format_name(get(b:VCSCommandBufferInfo, 0, ''))
       endif
     endif
   endif
 
-  if exists("g:airline#extensions#branch#displayed_head_limit")
-    let w:displayed_head_limit = g:airline#extensions#branch#displayed_head_limit
-    if len(b:airline_head) > w:displayed_head_limit - 1
-      let b:airline_head = b:airline_head[0:(w:displayed_head_limit - 1)].(&encoding ==? 'utf-8' ?  '…' : '.')
+  if empty(heads)
+    if airline#util#has_custom_scm()
+      try
+        let Fn = function(g:airline#extensions#branch#custom_head)
+        let b:airline_head = Fn()
+      endtry
     endif
   endif
 
-  let minwidth = empty(get(b:, 'airline_hunks', '')) ? 14 : 7
-  let b:airline_head = airline#util#shorten(b:airline_head, 120, minwidth)
+  if exists("g:airline#extensions#branch#displayed_head_limit")
+    let w:displayed_head_limit = g:airline#extensions#branch#displayed_head_limit
+    if strwidth(b:airline_head) > w:displayed_head_limit - 1
+      let b:airline_head =
+            \ airline#util#strcharpart(b:airline_head, 0, w:displayed_head_limit - 1)
+            \ . (&encoding ==? 'utf-8' ?  '…' : '.')
+    endif
+  endif
+
   return b:airline_head
 endfunction
 
 function! airline#extensions#branch#get_head()
   let head = airline#extensions#branch#head()
-  let empty_message = get(g:, 'airline#extensions#branch#empty_message', '')
+  let winwidth = get(airline#parts#get('branch'), 'minwidth', 120)
+  let minwidth = empty(get(b:, 'airline_hunks', '')) ? 14 : 7
+  let head = airline#util#shorten(head, winwidth, minwidth)
   let symbol = get(g:, 'airline#extensions#branch#symbol', g:airline_symbols.branch)
   return empty(head)
-        \ ? empty_message
+        \ ? get(g:, 'airline#extensions#branch#empty_message', '')
         \ : printf('%s%s', empty(symbol) ? '' : symbol.(g:airline_symbols.space), head)
 endfunction
 
 function! s:reset_untracked_cache(shellcmdpost)
   " shellcmdpost - whether function was called as a result of ShellCmdPost hook
+  if !exists('#airline')
+    " airline disabled
+    return
+  endif
   if !g:airline#init#vim_async && !has('nvim')
     if a:shellcmdpost
       " Clear cache only if there was no error or the script uses an
@@ -284,11 +353,17 @@ function! s:reset_untracked_cache(shellcmdpost)
   endfor
 endfunction
 
+function! s:sh_autocmd_handler()
+  if exists('#airline')
+    unlet! b:airline_head b:airline_do_mq_check
+  endif
+endfunction
+
 function! airline#extensions#branch#init(ext)
   call airline#parts#define_function('branch', 'airline#extensions#branch#get_head')
 
-  autocmd ShellCmdPost,CmdwinLeave * unlet! b:airline_head b:airline_do_mq_check
-  autocmd User AirlineBeforeRefresh unlet! b:airline_head b:airline_do_mq_check
+  autocmd ShellCmdPost,CmdwinLeave * call s:sh_autocmd_handler()
+  autocmd User AirlineBeforeRefresh call s:sh_autocmd_handler()
   autocmd BufWritePost * call s:reset_untracked_cache(0)
   autocmd ShellCmdPost * call s:reset_untracked_cache(1)
 endfunction
