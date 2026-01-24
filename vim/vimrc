@@ -36,9 +36,14 @@ set showbreak=↳\
 set showmatch
 
 "
-" Airline
+" Statusline
 " " " " "
-set laststatus=2 " always show airline
-let g:airline#extensions#tabline#enabled=1 " show tabline
-let g:airline#extensions#tabline#fnamemod=':p'
-let g:airline_section_z='%l:%c'
+set laststatus=2 " always show statusline
+set showtabline=2 " always show tabline
+set statusline=%#Search#\ %{SimpleMode()}\ %#StatusLineNC#\ %F\ %m%=%y\ %#Search#\ L%l\ C%c\ 
+
+function! SimpleMode()
+    let mode_cpy = mode()
+    let m = get({"\x16": '^V', "\x13": '^S'}, mode_cpy, mode_cpy)
+    return toupper(m)
+endfunction
