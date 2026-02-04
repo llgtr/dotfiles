@@ -125,6 +125,7 @@ link_file "emacs/" ".emacs.d"
 link_file "tmux/tmux.conf" ".tmux.conf"
 link_file "alacritty/" ".config/alacritty"
 link_file "ghostty/" ".config/ghostty"
+link_file "nvim/" ".config/nvim"
 
 if [[ "$(uname -s)" == "Darwin" ]]; then
     echo_c "Running MacOS-specific stuff." 2 -b
