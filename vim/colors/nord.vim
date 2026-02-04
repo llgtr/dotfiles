@@ -250,6 +250,9 @@ else
   call s:hi("VertSplit", s:nord2_gui, s:nord1_gui, s:nord3_term, s:nord1_term, "NONE", "")
 endif
 
+"+--- Window ---+
+call s:hi("NormalFloat", "", s:nord0_gui, "NONE", "", "NONE", "")
+
 "+----------------------+
 "+ Language Base Groups +
 "+----------------------+
