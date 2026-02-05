@@ -38,9 +38,9 @@ check_git_branch_dirty() {
     command git rev-parse --is-inside-work-tree &>/dev/null || return
 
     test -z "$(git status --porcelain -unormal)"
-    [[ $? -ne 0 ]] && local dirty_marker="*"
+    [[ $? -ne 0 ]] && local dirty_marker="[*]"
 
-    echo " %F{245}$(git rev-parse --abbrev-ref HEAD)${dirty_marker}%f"
+    echo " %F{245}$(git rev-parse --abbrev-ref HEAD) ${dirty_marker}%f"
 }
 
 check_jobs() {
