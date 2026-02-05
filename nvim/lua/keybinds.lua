@@ -46,7 +46,7 @@ require('which-key').add({
     { '<leader>w', group = 'Window' },
     { '<leader>ws', "<C-w>w", desc = 'Swap active window' },
     { '<leader>w%', "<C-w>v", desc = 'Split vertically' },
-    { '<leader>w\\', "<C-w>s", desc = 'Split horizontally' },
+    { '<leader>w\"', "<C-w>s", desc = 'Split horizontally' },
     { '<leader>wd', "<C-w>q", desc = 'Kill current window' },
     { '<leader>wD', "<C-w>o", desc = 'Kill other windows' },
 })
