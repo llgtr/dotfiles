@@ -16,6 +16,8 @@ vim.diagnostic.config({
             [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
         },
     },
+    float = { border = 'rounded', source = 'if_many' },
+    jump = { float = true },
 })
 
 -- Setup "annex" to statusline that shows diagnostics and lsp state
