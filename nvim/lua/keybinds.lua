@@ -36,7 +36,7 @@ require('which-key').add({
     { '<leader>lF', function() vim.lsp.buf.format({ async = true }) end, desc = 'Format' },
     { '<leader>ld', vim.lsp.buf.hover, desc = 'Describe' },
     { '<leader>lr', vim.lsp.buf.rename, desc = 'Rename symbol' },
-    { '<leader>lh', function() vim.lsp.buf.clear_references() vim.lsp.buf.document_highlight() end, desc = 'Highlight symbol' },
+    { '<leader>lh', vim.lsp.buf.document_highlight, desc = 'Highlight symbol' },
 
     { '<leader>p', group = 'Project' },
     { '<leader>pf', "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = 'Find file' },

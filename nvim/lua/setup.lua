@@ -55,3 +55,11 @@ end
 
 local current = vim.api.nvim_get_option('statusline')
 vim.opt.statusline = current .. '%#StatusLineNC# %{%v:lua.lsp_info()%} '
+
+-- Setup autocommand for clearing LSP highlights on cursor move
+vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter" }, {
+    group = vim.api.nvim_create_augroup("LspRefHighlight", { clear = true }),
+    callback = function()
+        vim.lsp.buf.clear_references()
+    end,
+})
