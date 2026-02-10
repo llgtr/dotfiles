@@ -9,6 +9,11 @@
       "rev": "819388c5546548016b0dab9a72a42aa5a40bf35d",
       "src": "https://codeberg.org/andyg/leap.nvim.git"
     },
+    "mini.pairs": {
+      "rev": "d5a29b6254dad07757832db505ea5aeab9aad43a",
+      "src": "https://github.com/nvim-mini/mini.pairs.git",
+      "version": "'v0.17.0'"
+    },
     "nvim-lspconfig": {
       "rev": "5bfcc89fd155b4ffc02d18ab3b7d19c2d4e246a7",
       "src": "https://github.com/neovim/nvim-lspconfig",

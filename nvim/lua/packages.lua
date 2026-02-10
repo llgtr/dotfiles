@@ -4,6 +4,7 @@ vim.pack.add({
     { src = "https://github.com/folke/which-key.nvim.git", version = "v3.17.0" },
     { src = "https://codeberg.org/andyg/leap.nvim.git" },
     { src = "https://github.com/saghen/blink.cmp.git", version = "v1.9.0" },
+    { src = "https://github.com/nvim-mini/mini.pairs.git", version = "v0.17.0" },
 })
 
 require('which-key').setup({
@@ -46,3 +47,4 @@ require('blink.cmp').setup({
     fuzzy = { implementation = "prefer_rust_with_warning" }
 })
 
+require('mini.pairs').setup()
