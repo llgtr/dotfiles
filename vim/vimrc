@@ -19,6 +19,7 @@ set nowritebackup
 set noswapfile
 set incsearch
 set hlsearch
+set nofixendofline
 
 "
 " Format
