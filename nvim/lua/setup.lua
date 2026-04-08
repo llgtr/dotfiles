@@ -17,7 +17,16 @@ vim.diagnostic.config({
         },
     },
     float = { border = 'rounded', source = 'if_many' },
-    jump = { float = true },
+    jump = {
+        on_jump = function(diagnostic, bufnr)
+            if not diagnostic then return end
+            vim.diagnostic.open_float({
+                bufnr = bufnr,
+                scope = "cursor",
+                focus = false,
+            })
+        end,
+    },
 })
 
 -- Setup "annex" to statusline that shows diagnostics and lsp state
