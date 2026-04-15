@@ -14,9 +14,8 @@ brew "hugo"
 brew "jq"
 brew "shellcheck"
 brew "fnm"
-brew "rustup"
+brew "neovim"
 
 # Casks
 cask "ghostty"
 cask "emacs"
-cask "visual-studio-code"
