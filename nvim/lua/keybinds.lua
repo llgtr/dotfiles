@@ -4,12 +4,13 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- Bindings
+local builtin = require('telescope.builtin')
 require('which-key').add({
     { '<leader><leader>', "<Plug>(leap)", desc = 'Leap' },
     { '<leader><Tab>', "<C-w>w", desc = 'Swap active window' },
 
     { '<leader>b', group = 'Buffer' },
-    { '<leader>bb', "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = 'List buffers' },
+    { '<leader>bb', builtin.buffers, desc = 'List buffers' },
     { '<leader>bd', "<cmd>bdelete<cr>", desc = 'Kill current buffer' },
     { '<leader>bD', "<cmd>%bdelete<cr>", desc = 'Kill all buffers' },
 
@@ -20,8 +21,8 @@ require('which-key').add({
     { '<leader>ee', vim.diagnostic.open_float, desc = 'Show error' },
 
     { '<leader>h', group = 'Help' },
-    { '<leader>hh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", desc = 'Search help tags' },
-    { '<leader>hk', "<cmd>lua require('telescope.builtin').keymaps()<cr>", desc = 'Search normal mode keymaps' },
+    { '<leader>hh', builtin.help_tags, desc = 'Search help tags' },
+    { '<leader>hk', builtin.keymaps, desc = 'Search normal mode keymaps' },
 
     { '<leader>j', group = 'Jump' },
     { '<leader>jw', "<Plug>(leap)", desc = 'Leap to word' },
@@ -39,10 +40,10 @@ require('which-key').add({
     { '<leader>lh', vim.lsp.buf.document_highlight, desc = 'Highlight symbol' },
 
     { '<leader>p', group = 'Project' },
-    { '<leader>pf', "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = 'Find file' },
+    { '<leader>pf', builtin.find_files, desc = 'Find file' },
 
     { '<leader>s', group = 'Search' },
-    { '<leader>sr', "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = 'Search with ripgrep' },
+    { '<leader>sr', builtin.live_grep, desc = 'Search with ripgrep' },
 
     { '<leader>w', group = 'Window' },
     { '<leader>ws', "<C-w>w", desc = 'Swap active window' },
