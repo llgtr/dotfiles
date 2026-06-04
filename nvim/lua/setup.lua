@@ -1,3 +1,6 @@
+-- Default border for all floating windows
+vim.o.winborder = 'rounded'
+
 -- Setup the diagnostic framework with desired visuals
 vim.diagnostic.config({
     virtual_text = true,
