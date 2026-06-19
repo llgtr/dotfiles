@@ -5,6 +5,7 @@ vim.pack.add({
     { src = "https://codeberg.org/andyg/leap.nvim.git" },
     { src = "https://github.com/saghen/blink.cmp.git", version = "v1.9.0" },
     { src = "https://github.com/nvim-mini/mini.pairs.git", version = "v0.17.0" },
+    { src = 'https://github.com/neovim/nvim-lspconfig', version = "v2.10.0" },
 })
 
 require('which-key').setup({
