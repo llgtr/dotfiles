@@ -31,7 +31,10 @@ require('which-key').setup({
 })
 
 require('blink.cmp').setup({
-    keymap = { preset = 'super-tab' },
+    keymap = {
+        preset = 'enter',
+        ['<Tab>'] = { 'accept', 'fallback' }
+    },
     appearance = { nerd_font_variant = 'mono' },
     completion = {
         documentation = { auto_show = false },
