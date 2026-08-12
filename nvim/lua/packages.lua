@@ -52,3 +52,13 @@ require('blink.cmp').setup({
 })
 
 require('mini.pairs').setup()
+
+require('telescope').setup({
+    pickers = {
+        find_files = {
+            on_input_filter_cb = function(prompt)
+                return { prompt = (prompt:gsub("%s", "")) }
+            end,
+        },
+    },
+})
